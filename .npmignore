@@ -1,0 +1,7 @@
+src
+test
+mocks
+.*
+TODO
+*.config.js
+tsconfig.json
