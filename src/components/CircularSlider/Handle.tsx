@@ -1,32 +1,39 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import type { IHandle } from '../../types/CircularSlider.types'
+import { getXY, toDeg } from '../../utils/CircularSlider.utils'
 
 /**
  * Handle for the slider
  */
 export const Handle = (props: IHandle) => {
-  const [x, setX] = useState<number>(props.x)
-  const [y, setY] = useState<number>(props.y)
   const [centerX, setCenterX] = useState<number>(0)
   const [centerY, setCenterY] = useState<number>(0)
   const [dragging, setDragging] = useState<boolean>(false)
+  let prev = props.angle.angle
 
-  const getPosition = (mouseX : number, mouseY : number) => {
+  const setPosition = (mouseX : number, mouseY : number) => {
     const a = Math.atan((mouseX - centerX) / (centerY - mouseY))
-    let angle = a / Math.PI * 180
+    let angle = toDeg(a)
     if (mouseY <= centerY) {
-      const x = props.radius + props.padding + (Math.sin(a) * props.radius)
-      const y = props.radius + props.padding - (Math.cos(a) * props.radius)
       angle = angle < 0 ? 360 + angle : angle
-      props.setAngle({ angle, x, y })
-      return { x, y }
     } else {
-      const x = props.radius + props.padding - (Math.sin(a) * props.radius)
-      const y = props.radius + props.padding + (Math.cos(a) * props.radius)
-      angle = angle < 0 ? 180 + angle : 180 + angle
-      props.setAngle({ angle, x, y })
-      return { x, y }
+      angle = 180 + angle
     }
+
+    const maxPlus = props.max < props.angle.angle ? props.max + 360 - props.angle.angle : props.max - props.angle.angle
+    const diffPlus = angle < props.angle.angle ? angle + 360 - props.angle.angle : angle - props.angle.angle
+
+    const maxMin = props.max > props.angle.angle ? props.max - 360 - props.angle.angle : props.max - props.angle.angle
+    const diffMin = angle > props.angle.angle ? angle - 360 - props.angle.angle : angle - props.angle.angle
+
+    console.log(angle + ' ' + prev)
+
+    if ((angle >= prev && diffPlus <= maxPlus) || (angle <= prev && diffMin >= maxMin)) {
+      props.setAngle({ angle, ...getXY(angle, props.radius, props.padding) })
+    } else {
+      props.setAngle({ angle: props.max, ...getXY(props.max, props.radius, props.padding) })
+    }
+    prev = angle
   }
 
   const onMouseDown = (e : any) => {
@@ -49,9 +56,7 @@ export const Handle = (props: IHandle) => {
 
   const onMouseMove = (e : any) => {
     if (!dragging) return
-    const pos = getPosition(e.pageX, e.pageY)
-    setX(pos.x)
-    setY(pos.y)
+    setPosition(e.pageX, e.pageY)
     e.stopPropagation()
     e.preventDefault()
   }
@@ -68,8 +73,8 @@ export const Handle = (props: IHandle) => {
     <circle
       id={dragging ? 'active' : 'non-active'}
       onMouseDown={onMouseDown}
-      cx={x}
-      cy={y}
+      cx={props.angle.x}
+      cy={props.angle.y}
       r={6}
       stroke="#69c0ff"
       fill="white"

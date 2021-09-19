@@ -11,14 +11,6 @@ export interface ICircularSlider {
 
 export interface IHandle {
   /**
-   * The X position
-   */
-   x: number,
-   /**
-   * The Y position
-   */
-   y: number,
-  /**
    * Radius of the slider
    */
    radius: number,
@@ -29,7 +21,9 @@ export interface IHandle {
   /**
    * Angle callback of the slider
    */
-  setAngle: any
+  setAngle: any,
+  angle : {angle: number, x: number, y: number},
+  max: number
 }
 
 export interface IArc {

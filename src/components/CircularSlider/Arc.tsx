@@ -5,7 +5,6 @@ import type { IArc } from '../../types/CircularSlider.types'
  * Arc for the slider
  */
 export const Arc = (props: IArc) => {
-  console.log(props.largeFlag + ' ' + props.sweepFlag)
   return (
     <path
       d={`M ${props.start.x} ${props.start.y} ` +
