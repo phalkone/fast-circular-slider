@@ -36,8 +36,24 @@ const CircularSlider = (props: ICircularSlider) => {
         width={props.radius * 2 + 16}
         height={props.radius * 2 + 16}
       >
-        {/* Background circle */}
-        <circle cx={center} cy={center} r={props.radius} stroke="#dedede" fill="transparent" strokeWidth="4" />
+        <circle
+          cx={center}
+          cy={center}
+          r={props.radius}
+          stroke="#dedede"
+          fill="transparent"
+          strokeWidth="4"
+        />
+        {first.angle === second.angle &&
+          <circle
+            cx={center}
+            cy={center}
+            r={props.radius}
+            stroke="#69c0ff"
+            fill="transparent"
+            strokeWidth="4"
+          />
+        }
         <Arc
           largeFlag={ (second.angle < first.angle ? 360 - first.angle + second.angle : second.angle - first.angle) > 180 ? 1 : 0 }
           start={{ x: second.x, y: second.y }}
