@@ -22,8 +22,10 @@ export interface IHandle {
    * Angle callback of the slider
    */
   setAngle: any,
+  /**
+   * Properties of the handle
+   */
   angle : {angle: number, x: number, y: number},
-  max: number
 }
 
 export interface IArc {
@@ -43,6 +45,8 @@ export interface IArc {
    * Center of the slider
    */
    padding: number,
-   sweepFlag: number,
+  /**
+   * Flag to set correct arc
+   */
    largeFlag: number
 }

@@ -8,7 +8,7 @@ export const Arc = (props: IArc) => {
   return (
     <path
       d={`M ${props.start.x} ${props.start.y} ` +
-      `A ${props.radius} ${props.radius} 0 ${props.largeFlag} ${props.sweepFlag}` +
+      `A ${props.radius} ${props.radius} 0 ${props.largeFlag} 0` +
       `${props.end.x} ${props.end.y}`}
       fill='none'
       stroke='#69c0ff'
