@@ -16,7 +16,7 @@
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js,tsx,ts src && tsc"
   },
   "keywords": [
-    "wind",
+    "slider",
     "react"
   ],
   "author": "Diodorus",

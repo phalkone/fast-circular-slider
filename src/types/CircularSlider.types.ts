@@ -9,15 +9,7 @@ export interface ICircularSlider {
    padding: number
 }
 
-export interface IHandle {
-  /**
-   * Radius of the slider
-   */
-   radius: number,
-   /**
-   * Center of the slider
-   */
-   padding: number,
+export interface IHandle extends ICircularSlider {
   /**
    * Angle callback of the slider
    */
@@ -28,7 +20,22 @@ export interface IHandle {
   angle : {angle: number, x: number, y: number},
 }
 
-export interface IArc {
+export interface IDegreeInput extends ICircularSlider {
+  /**
+   * Angle callback of the slider
+   */
+  setAngle: any,
+  /**
+   * Value of the field
+   */
+  value: string,
+  /**
+   * To position the input field
+   */
+  leftOffset: number
+}
+
+export interface IArc extends ICircularSlider {
   /**
    * The start position
    */
@@ -37,14 +44,6 @@ export interface IArc {
    * The end position
    */
     end: any,
-  /**
-   * Radius of the slider
-   */
-   radius: number,
-   /**
-   * Center of the slider
-   */
-   padding: number,
   /**
    * Flag to set correct arc
    */

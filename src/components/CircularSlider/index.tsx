@@ -3,7 +3,7 @@ import type { ICircularSlider } from '../../types/CircularSlider.types'
 import { Handle } from './Handle'
 import { Arc } from './Arc'
 import { getXY } from '../../utils/CircularSlider.utils'
-import * as styles from '../../themes/CircularSlider.css'
+import { DegreeInput } from './DegreeInput'
 
 /**
  * Draws a circular slider for provided relative wind data
@@ -16,21 +16,20 @@ const CircularSlider = (props: ICircularSlider) => {
 
   return (
     <div>
-      <div>
-        <input
-          type='number'
-          className={styles.input}
-          value={first.angle}
-          onChange={e => setFirst({ angle: +e.target.value, ...getXY(+e.target.value, props.radius, props.padding) })}
-        />
-        <label> - </label>
-        <input
-          type='number'
-          className={styles.input}
-          value={second.angle}
-          onChange={e => setSecond({ angle: +e.target.value, ...getXY(+e.target.value, props.radius, props.padding) })}
-        />
-      </div>
+      <DegreeInput
+        leftOffset={-32}
+        value={first.angle.toString().padStart(3, '0')}
+        setAngle={setFirst}
+        radius={props.radius}
+        padding={props.padding}
+      />
+      <DegreeInput
+        leftOffset={11}
+        value={second.angle.toString().padStart(3, '0')}
+        setAngle={setSecond}
+        radius={props.radius}
+        padding={props.padding}
+      />
       <svg
         version='1.1'
         width={props.radius * 2 + 16}
@@ -73,12 +72,6 @@ const CircularSlider = (props: ICircularSlider) => {
           radius={props.radius}
           padding={props.padding}
         />
-        <text x={center - 32}
-              y={center + 6}
-              fontSize={12} >
-          {`${Math.round(first.angle).toString().padStart(3, '0')}° - ` +
-           `${Math.round(second.angle).toString().padStart(3, '0')}°`}
-        </text>
         <use href='#active' />
       </svg>
     </div>
