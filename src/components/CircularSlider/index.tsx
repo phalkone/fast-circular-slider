@@ -59,6 +59,10 @@ const CircularSlider = (props: ICircularSlider) => {
           end={{ x: first.x, y: first.y }}
           radius={props.radius}
           padding={props.padding}
+          first={first.angle}
+          second={second.angle}
+          setFirst={setFirst}
+          setSecond={setSecond}
         />
         <Handle
           setAngle={setFirst}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import type { IHandle } from '../../types/CircularSlider.types'
-import { getXY, toDeg } from '../../utils/CircularSlider.utils'
+import { getXY, getAngle } from '../../utils/CircularSlider.utils'
 
 /**
  * Handle for the slider
@@ -9,17 +9,6 @@ export const Handle = (props: IHandle) => {
   const [centerX, setCenterX] = useState<number>(0)
   const [centerY, setCenterY] = useState<number>(0)
   const [dragging, setDragging] = useState<boolean>(false)
-
-  const setPosition = (mouseX : number, mouseY : number) => {
-    const a = Math.atan((mouseX - centerX) / (centerY - mouseY))
-    let angle = Math.round(toDeg(a))
-    if (mouseY <= centerY) {
-      angle = angle < 0 ? 360 + angle : angle
-    } else {
-      angle = 180 + angle
-    }
-    props.setAngle({ angle: angle, ...getXY(Math.round(angle), props.radius, props.padding) })
-  }
 
   const onMouseDown = (e : any) => {
     if (e.button !== 0) return
@@ -41,7 +30,8 @@ export const Handle = (props: IHandle) => {
 
   const onMouseMove = (e : any) => {
     if (!dragging) return
-    setPosition(e.pageX, e.pageY)
+    const angle = getAngle(e.pageX, e.pageY, { x: centerX, y: centerY })
+    props.setAngle({ angle: angle, ...getXY(angle, props.radius, props.padding) })
     e.stopPropagation()
     e.preventDefault()
   }

@@ -48,4 +48,8 @@ export interface IArc extends ICircularSlider {
    * Flag to set correct arc
    */
    largeFlag: number
+   first: number,
+   second: number,
+   setFirst: any,
+   setSecond: any
 }
