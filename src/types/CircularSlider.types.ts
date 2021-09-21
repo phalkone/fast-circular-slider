@@ -1,17 +1,6 @@
 import type { Dispatch, SetStateAction } from 'react'
 
-export interface ICommon {
-  /**
-   * Radius of the slider
-   */
-   radius: number,
-   /**
-   * Padding of the slider element
-   */
-   padding: number
-}
-
-export interface ICircularSlider extends ICommon {
+export interface ICircularSlider {
   /**
    * Default start angle
    */
@@ -19,33 +8,40 @@ export interface ICircularSlider extends ICommon {
    /**
    * Default end angle
    */
-   defaultEnd: number
+   defaultEnd: number,
+  /**
+   * Radius of the slider
+   */
+  radius: number,
+  /**
+   * Padding of the slider element
+   */
+  padding: number
 }
 
 export interface IHandle {
   /**
    * Angle callback of the slider
    */
-  setAngle: Dispatch<SetStateAction<{
-    x: number,
-    y: number,
-    angle: number
-  }>>,
+  setAngle: Dispatch<SetStateAction<number>>,
   /**
    * Properties of the handle
    */
-  angle : {angle: number, x: number, y: number},
+  angle : {
+    x: number,
+    y: number
+  },
+  /**
+   * Relative center
+   */
+  center: number
 }
 
 export interface IDegreeInput {
   /**
    * Angle callback of the slider
    */
-  setAngle: Dispatch<SetStateAction<{
-    x: number,
-    y: number,
-    angle: number
-  }>>,
+  setAngle: Dispatch<SetStateAction<number>>,
   /**
    * Value of the field
    */
@@ -54,6 +50,10 @@ export interface IDegreeInput {
    * To position the input field
    */
   leftOffset: number
+  /**
+   * Relative center
+   */
+  center: number
 }
 
 export interface IArc {
@@ -86,17 +86,17 @@ export interface IArc {
    /**
     * Method to set parent state start angle
     */
-   setStart: Dispatch<SetStateAction<{
-    x: number,
-    y: number,
-    angle: number
-  }>>,
-      /**
+   setStart: Dispatch<SetStateAction<number>>,
+  /**
     * Method to set parent state end angle
     */
-   setEnd: Dispatch<SetStateAction<{
-    x: number,
-    y: number,
-    angle: number
-  }>>
+   setEnd: Dispatch<SetStateAction<number>>,
+  /**
+   * Relative center
+   */
+  center: number,
+  /**
+   * Radius of the circle
+   */
+  radius: number
 }

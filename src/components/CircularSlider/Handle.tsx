@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import type { IHandle } from '../../types/CircularSlider.types'
-import { getXY, getAngle } from '../../utils/CircularSlider.utils'
-import { CircularSliderContext } from '.'
+import { getAngle } from '../../utils/CircularSlider.utils'
 
 /**
  * Handle for the slider
  */
 export const Handle = (props: IHandle) => {
-  const [centerX, setCenterX] = useState<number>(0)
-  const [centerY, setCenterY] = useState<number>(0)
+  const [center, setCenter] = useState<{x: number, y: number}>({ x: 0, y: 0 })
   const [dragging, setDragging] = useState<boolean>(false)
-  const context = useContext(CircularSliderContext)
 
-  const onMouseDown = (e : any) => {
+  const onMouseDown = (e : any) : void => {
     if (e.button !== 0) return
     setDragging(true)
     const parent : DOMRect = e.target.parentNode.getBoundingClientRect()
-    setCenterX(parent.x + context.padding + context.radius)
-    setCenterY(parent.y + context.padding + context.radius)
+    setCenter({
+      x: parent.x + props.center,
+      y: parent.y + props.center
+    })
     e.stopPropagation()
     e.preventDefault()
   }
@@ -32,8 +31,8 @@ export const Handle = (props: IHandle) => {
 
   const onMouseMove = (e : any) => {
     if (!dragging) return
-    const angle = getAngle(e.pageX, e.pageY, { x: centerX, y: centerY })
-    props.setAngle({ angle: angle, ...getXY(angle, context.radius, context.padding) })
+    const angle = getAngle(e.pageX, e.pageY, center)
+    props.setAngle(angle)
     e.stopPropagation()
     e.preventDefault()
   }

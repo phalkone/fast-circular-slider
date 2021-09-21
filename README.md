@@ -2,6 +2,8 @@
 
 ## Introduction
 
+Circular slider with start and end handle designed for the FAST project.
+
 ## Installation
 
 You can install `fast-circular-slider` via Yarn or npm:

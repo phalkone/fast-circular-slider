@@ -29,7 +29,7 @@ export const getAngle = (mouseX : number, mouseY : number, center : {
   const a = Math.atan((mouseX - center.x) / (center.y - mouseY))
   let angle = Math.round(toDeg(a))
   if (mouseY <= center.y) {
-    angle = angle < 0 ? 360 + angle : angle
+    angle = bound(angle)
   } else {
     angle = 180 + angle
   }

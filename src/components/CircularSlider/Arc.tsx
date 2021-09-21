@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { IArc } from '../../types/CircularSlider.types'
-import { getXY, getAngle, bound } from '../../utils/CircularSlider.utils'
-import { CircularSliderContext } from '.'
+import { getAngle, bound } from '../../utils/CircularSlider.utils'
 
 /**
  * Arc for the slider
@@ -20,15 +19,14 @@ export const Arc = (props: IArc) => {
       arc: 0
     })
   const [dragging, setDragging] = useState<boolean>(false)
-  const context = useContext(CircularSliderContext)
 
   const onMouseDown = (e : any) => {
     if (e.button !== 0) return
     setDragging(true)
     const parent : DOMRect = e.target.parentNode.getBoundingClientRect()
     const initialCenter = {
-      x: parent.x + context.padding + context.radius,
-      y: parent.y + context.padding + context.radius
+      x: parent.x + props.center,
+      y: parent.y + props.center
     }
     setInitial({
       ...initialCenter,
@@ -54,8 +52,8 @@ export const Arc = (props: IArc) => {
     const diff = newAngle - initial.arc
     const start = bound(initial.start + diff)
     const end = bound(initial.end + diff)
-    props.setStart({ angle: start, ...getXY(start, context.radius, context.padding) })
-    props.setEnd({ angle: end, ...getXY(end, context.radius, context.padding) })
+    props.setStart(start)
+    props.setEnd(end)
     e.stopPropagation()
     e.preventDefault()
   }
@@ -70,7 +68,7 @@ export const Arc = (props: IArc) => {
   return (
     <path
       d={`M ${props.startPoint.x} ${props.startPoint.y} ` +
-      `A ${context.radius} ${context.radius} 0 ${props.largeFlag} 0` +
+      `A ${props.radius} ${props.radius} 0 ${props.largeFlag} 0 ` +
       `${props.endPoint.x} ${props.endPoint.y}`}
       fill='none'
       stroke='#69c0ff'
