@@ -1,16 +1,26 @@
 import React from 'react'
 import { render } from 'react-dom'
 import CircularSlider from './components/CircularSlider'
-import * as styles from './themes/CircularSlider.css'
 
 const element = document.createElement('div')
 
 render(
-  <div className={styles.container} >
+  <div style={{ fontFamily: 'Roboto, "Open Sans", sans-serif' }} >
     <div>
-        <label className={styles.formLabel }>Wind direction (°)</label>
+        <label style={{
+          fontVariant: 'tabular-nums',
+          color: '#16304e',
+          marginBottom: '4px',
+          fontWeight: 500,
+          fontSize: '14px'
+        }}>Wind direction (°)</label>
     </div>
-    <CircularSlider />
+    <CircularSlider
+      radius={50}
+      padding={8}
+      defaultStart={320}
+      defaultEnd={40}
+    />
   </div>
   , element)
 

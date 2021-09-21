@@ -1,4 +1,6 @@
-export interface ICircularSlider {
+import type { Dispatch, SetStateAction } from 'react'
+
+export interface ICommon {
   /**
    * Radius of the slider
    */
@@ -9,22 +11,41 @@ export interface ICircularSlider {
    padding: number
 }
 
-export interface IHandle extends ICircularSlider {
+export interface ICircularSlider extends ICommon {
+  /**
+   * Default start angle
+   */
+   defaultStart: number,
+   /**
+   * Default end angle
+   */
+   defaultEnd: number
+}
+
+export interface IHandle {
   /**
    * Angle callback of the slider
    */
-  setAngle: any,
+  setAngle: Dispatch<SetStateAction<{
+    x: number,
+    y: number,
+    angle: number
+  }>>,
   /**
    * Properties of the handle
    */
   angle : {angle: number, x: number, y: number},
 }
 
-export interface IDegreeInput extends ICircularSlider {
+export interface IDegreeInput {
   /**
    * Angle callback of the slider
    */
-  setAngle: any,
+  setAngle: Dispatch<SetStateAction<{
+    x: number,
+    y: number,
+    angle: number
+  }>>,
   /**
    * Value of the field
    */
@@ -35,21 +56,47 @@ export interface IDegreeInput extends ICircularSlider {
   leftOffset: number
 }
 
-export interface IArc extends ICircularSlider {
+export interface IArc {
   /**
-   * The start position
+   * The start point
    */
-   start: any,
+   startPoint: {
+     x: number,
+     y: number
+   },
    /**
-   * The end position
+   * The end point
    */
-    end: any,
+    endPoint: {
+      x: number,
+      y: number
+    },
   /**
    * Flag to set correct arc
    */
    largeFlag: number
-   first: number,
-   second: number,
-   setFirst: any,
-   setSecond: any
+   /**
+    * The starting angle
+    */
+   start: number,
+   /**
+    * The ending angle
+    */
+   end: number,
+   /**
+    * Method to set parent state start angle
+    */
+   setStart: Dispatch<SetStateAction<{
+    x: number,
+    y: number,
+    angle: number
+  }>>,
+      /**
+    * Method to set parent state end angle
+    */
+   setEnd: Dispatch<SetStateAction<{
+    x: number,
+    y: number,
+    angle: number
+  }>>
 }

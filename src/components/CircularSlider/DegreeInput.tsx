@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import type { IDegreeInput } from '../../types/CircularSlider.types'
 import * as styles from '../../themes/CircularSlider.css'
 import { getXY } from '../../utils/CircularSlider.utils'
+import { CircularSliderContext } from '.'
 
 /**
  * Input field for degrees
  */
 export const DegreeInput = (props: IDegreeInput) => {
-  const center = props.radius + props.padding
+  const context = useContext(CircularSliderContext)
+  const center = context.radius + context.padding
+
+  const setDegree = (e: any) => {
+    let degree = +e.target.value
+    if (degree > 360) {
+      degree = 360
+    }
+    props.setAngle({ angle: degree, ...getXY(degree, context.radius, context.padding) })
+  }
 
   return (
     <div
@@ -20,7 +30,7 @@ export const DegreeInput = (props: IDegreeInput) => {
           maxLength={3}
           className={styles.input}
           value={props.value}
-          onChange={e => props.setAngle({ angle: +e.target.value, ...getXY(+e.target.value, props.radius, props.padding) })}
+          onChange={setDegree}
         />
       </div>
     </div>
