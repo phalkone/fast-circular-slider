@@ -32,6 +32,7 @@ const CircularSlider = (props: ICircularSlider) => {
         version='1.1'
         width={center * 2}
         height={center * 2}
+        id='circular-slider'
       >
         <circle
           cx={center}

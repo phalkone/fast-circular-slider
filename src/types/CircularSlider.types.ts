@@ -19,6 +19,43 @@ export interface ICircularSlider {
   padding: number
 }
 
+export interface IPosition {
+  /**
+   * x coordinate
+   */
+  x: number,
+  /**
+   * y coordinate
+   */
+  y: number,
+}
+
+export interface IMousePos extends IPosition {
+  /**
+   * Mouse x coordinate
+   */
+  pageX: number,
+  /**
+   * Mouse y coordinate
+   */
+  pageY: number
+}
+
+export interface IInitialArc extends IPosition {
+  /**
+    * The starting angle
+    */
+  start: number,
+   /**
+    * The ending angle
+    */
+  end: number,
+   /**
+    * Angle of arc at mouse position
+    */
+  arc: number
+}
+
 export interface IHandle {
   /**
    * Angle callback of the slider
@@ -27,10 +64,7 @@ export interface IHandle {
   /**
    * Properties of the handle
    */
-  angle : {
-    x: number,
-    y: number
-  },
+  angle : IPosition,
   /**
    * Relative center
    */
@@ -60,17 +94,11 @@ export interface IArc {
   /**
    * The start point
    */
-   startPoint: {
-     x: number,
-     y: number
-   },
+   startPoint: IPosition,
    /**
    * The end point
    */
-    endPoint: {
-      x: number,
-      y: number
-    },
+    endPoint: IPosition,
   /**
    * Flag to set correct arc
    */
@@ -99,4 +127,12 @@ export interface IArc {
    * Radius of the circle
    */
   radius: number
+}
+
+export interface IDraggable {
+  initial: any,
+  onMouseDown: any,
+  onMouseMove: any,
+  children: any,
+  onTop: boolean
 }
