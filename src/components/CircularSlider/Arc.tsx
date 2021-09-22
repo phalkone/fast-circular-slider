@@ -20,25 +20,28 @@ export const Arc = (props: IArc) => {
     })
   const [dragging, setDragging] = useState<boolean>(false)
 
-  const onMouseDown = (e : any) => {
+  const onMouseDown = (e : React.MouseEvent<SVGElement>) => {
     if (e.button !== 0) return
     setDragging(true)
-    const parent : DOMRect = e.target.parentNode.getBoundingClientRect()
-    const initialCenter = {
-      x: parent.x + props.center,
-      y: parent.y + props.center
+    const target = e.target as SVGElement
+    if (target.parentNode) {
+      const parent : DOMRect = (target.parentNode as SVGElement).getBoundingClientRect()
+      const initialCenter = {
+        x: parent.x + props.center,
+        y: parent.y + props.center
+      }
+      setInitial({
+        ...initialCenter,
+        start: props.start,
+        end: props.end,
+        arc: getAngle(e.pageX, e.pageY, initialCenter)
+      })
     }
-    setInitial({
-      ...initialCenter,
-      start: props.start,
-      end: props.end,
-      arc: getAngle(e.pageX, e.pageY, initialCenter)
-    })
     e.stopPropagation()
     e.preventDefault()
   }
 
-  const onMouseUp = (e : any) => {
+  const onMouseUp = (e : MouseEvent) => {
     setDragging(false)
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
@@ -46,7 +49,7 @@ export const Arc = (props: IArc) => {
     e.preventDefault()
   }
 
-  const onMouseMove = (e : any) => {
+  const onMouseMove = (e : MouseEvent) => {
     if (!dragging) return
     const newAngle = getAngle(e.pageX, e.pageY, { x: initial.x, y: initial.y })
     const diff = newAngle - initial.arc

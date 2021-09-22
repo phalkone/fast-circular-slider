@@ -9,19 +9,22 @@ export const Handle = (props: IHandle) => {
   const [center, setCenter] = useState<{x: number, y: number}>({ x: 0, y: 0 })
   const [dragging, setDragging] = useState<boolean>(false)
 
-  const onMouseDown = (e : any) : void => {
+  const onMouseDown = (e : React.MouseEvent<SVGElement>) : void => {
     if (e.button !== 0) return
     setDragging(true)
-    const parent : DOMRect = e.target.parentNode.getBoundingClientRect()
-    setCenter({
-      x: parent.x + props.center,
-      y: parent.y + props.center
-    })
+    const target = e.target as SVGElement
+    if (target.parentNode) {
+      const parent : DOMRect = (target.parentNode as SVGElement).getBoundingClientRect()
+      setCenter({
+        x: parent.x + props.center,
+        y: parent.y + props.center
+      })
+    }
     e.stopPropagation()
     e.preventDefault()
   }
 
-  const onMouseUp = (e : any) => {
+  const onMouseUp = (e : MouseEvent) => {
     setDragging(false)
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
@@ -29,7 +32,7 @@ export const Handle = (props: IHandle) => {
     e.preventDefault()
   }
 
-  const onMouseMove = (e : any) => {
+  const onMouseMove = (e : MouseEvent) => {
     if (!dragging) return
     const angle = getAngle(e.pageX, e.pageY, center)
     props.setAngle(angle)
