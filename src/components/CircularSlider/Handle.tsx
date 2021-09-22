@@ -1,5 +1,5 @@
 import React from 'react'
-import type { IHandle, IPosition } from '../../types/CircularSlider.types'
+import type { IHandle, IPosition, IMousePos } from '../../types/CircularSlider.types'
 import { getAngle } from '../../utils/CircularSlider.utils'
 import { Draggable } from './Draggable'
 
@@ -7,7 +7,7 @@ import { Draggable } from './Draggable'
  * Handle for the slider
  */
 export const Handle = (props: IHandle) => {
-  const onMouseDown = (parent : IPosition) : IPosition => {
+  const onMouseDown = (parent : IMousePos) : IPosition => {
     return {
       x: parent.x + props.center,
       y: parent.y + props.center

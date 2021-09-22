@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface ICircularSlider {
   /**
@@ -45,15 +45,15 @@ export interface IInitialArc extends IPosition {
   /**
     * The starting angle
     */
-  start: number,
+  start?: number,
    /**
     * The ending angle
     */
-  end: number,
+  end?: number,
    /**
     * Angle of arc at mouse position
     */
-  arc: number
+  arc?: number
 }
 
 export interface IHandle {
@@ -129,10 +129,33 @@ export interface IArc {
   radius: number
 }
 
+interface IMouseDown {
+  (parent: IMousePos) : IPosition | IInitialArc
+}
+
+interface IMouseMove {
+  (x: number, y: number, initial: IPosition | IInitialArc) : void
+}
+
 export interface IDraggable {
-  initial: any,
-  onMouseDown: any,
-  onMouseMove: any,
-  children: any,
+  /**
+   * Initial value for draggable
+   */
+  initial: IPosition | IInitialArc,
+  /**
+   * Callback method for onMouseDown event
+   */
+  onMouseDown: IMouseDown,
+  /**
+   * Callback method for onMouseMove event
+   */
+  onMouseMove: IMouseMove,
+  /**
+   * Children of props
+   */
+  children: ReactNode,
+  /**
+   * If true component will be on top during dragging
+   */
   onTop: boolean
 }

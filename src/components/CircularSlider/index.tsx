@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import type { ICircularSlider } from '../../types/CircularSlider.types'
+import { getXY } from '../../utils/CircularSlider.utils'
+import * as styles from '../../themes/CircularSlider.css'
 import { Handle } from './Handle'
 import { Arc } from './Arc'
 import { DegreeInput } from './DegreeInput'
-import { getXY } from '../../utils/CircularSlider.utils'
 
 /**
  * Draws a circular slider for provided relative wind data
@@ -15,15 +16,15 @@ const CircularSlider = (props: ICircularSlider) => {
   const [end, setEnd] = useState(props.defaultEnd)
 
   return (
-    <div>
+    <div className={styles.container}>
       <DegreeInput
-        leftOffset={-32}
+        leftOffset={-40}
         value={start.toString().padStart(3, '0')}
         setAngle={setStart}
         center={center}
       />
       <DegreeInput
-        leftOffset={11}
+        leftOffset={3}
         value={end.toString().padStart(3, '0')}
         setAngle={setEnd}
         center={center}

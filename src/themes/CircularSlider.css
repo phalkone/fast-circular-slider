@@ -1,8 +1,12 @@
+.container {
+  position:relative;
+}
+
 .degreeField {
   position: absolute;
 }
 
-.dregree {
+.degree {
   display: inline-block;
   position: relative;
 }

@@ -21,12 +21,14 @@ export const Arc = (props: IArc) => {
   }
 
   const onMouseMove = (x: number, y: number, initial: IInitialArc) : void => {
-    const newAngle = getAngle(x, y, { x: initial.x, y: initial.y })
-    const diff = newAngle - initial.arc
-    const start = bound(initial.start + diff)
-    const end = bound(initial.end + diff)
-    props.setStart(start)
-    props.setEnd(end)
+    if (initial.arc && initial.start && initial.end) {
+      const newAngle = getAngle(x, y, { x: initial.x, y: initial.y })
+      const diff = newAngle - initial.arc
+      const start = bound(initial.start + diff)
+      const end = bound(initial.end + diff)
+      props.setStart(start)
+      props.setEnd(end)
+    }
   }
 
   return (
