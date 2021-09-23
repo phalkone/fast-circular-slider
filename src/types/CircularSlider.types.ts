@@ -4,11 +4,11 @@ export interface ICircularSlider {
   /**
    * Default start angle
    */
-   defaultStart: number,
+   start: number,
    /**
    * Default end angle
    */
-   defaultEnd: number,
+   end: number,
   /**
    * Radius of the slider
    */

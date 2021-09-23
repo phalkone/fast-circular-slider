@@ -37,8 +37,8 @@ render(
   <CircularSlider
       radius={50}
       padding={8}
-      defaultStart={320}
-      defaultEnd={40}
+      start={320}
+      end={40}
   />, document.getElementById('root'))
 ```
 
@@ -48,8 +48,8 @@ Prop name | Type | Default | Description
 ----------|------|---------|-------------
 radius  | number | 50 | Radius of the circular slider
 padding | number | 8 | Padding around the slider circle
-defaultStart | number | 320 | Initial value of the start angle
-defaultEnd | number | 40 | Initial value of the end angle
+start | number | 320 | Initial value of the start angle
+end | number | 40 | Initial value of the end angle
 
 ## License
 

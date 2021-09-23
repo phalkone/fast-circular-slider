@@ -12,8 +12,8 @@ import { DegreeInput } from './DegreeInput'
  */
 const CircularSlider = (props: ICircularSlider) => {
   const center = props.radius + props.padding
-  const [start, setStart] = useState(props.defaultStart)
-  const [end, setEnd] = useState(props.defaultEnd)
+  const [start, setStart] = useState(props.start)
+  const [end, setEnd] = useState(props.end)
 
   return (
     <div className={styles.container}>
@@ -33,7 +33,6 @@ const CircularSlider = (props: ICircularSlider) => {
         version='1.1'
         width={center * 2}
         height={center * 2}
-        id='circular-slider'
       >
         <circle
           cx={center}
@@ -83,8 +82,8 @@ const CircularSlider = (props: ICircularSlider) => {
 CircularSlider.defaultProps = {
   radius: 50,
   padding: 8,
-  defaultStart: 320,
-  defaultEnd: 40
+  start: 320,
+  end: 40
 }
 
 export default CircularSlider

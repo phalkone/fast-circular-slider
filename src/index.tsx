@@ -18,8 +18,8 @@ render(
     <CircularSlider
       radius={50}
       padding={8}
-      defaultStart={320}
-      defaultEnd={40}
+      start={320}
+      end={40}
     />
   </div>
   , element)
