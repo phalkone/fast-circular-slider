@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import type { ICircularSlider } from '../../types/CircularSlider.types'
 import { getXY } from '../../utils/CircularSlider.utils'
 import * as styles from '../../themes/CircularSlider.css'
@@ -14,6 +14,12 @@ const CircularSlider = (props: ICircularSlider) => {
   const center = props.radius + props.padding
   const [start, setStart] = useState(props.start)
   const [end, setEnd] = useState(props.end)
+  const startPoint = getXY(start, props.radius, props.padding)
+  const endPoint = getXY(end, props.radius, props.padding)
+
+  useEffect(() => {
+    props.onChange([start, end])
+  }, [start, end])
 
   return (
     <div className={styles.container}>
@@ -38,24 +44,24 @@ const CircularSlider = (props: ICircularSlider) => {
           cx={center}
           cy={center}
           r={props.radius}
-          stroke="#dedede"
-          fill="transparent"
-          strokeWidth="4"
+          stroke='#dedede'
+          fill='transparent'
+          strokeWidth='4'
         />
         {(start === end || Math.abs(start - end) === 360) &&
           <circle
             cx={center}
             cy={center}
             r={props.radius}
-            stroke="#69c0ff"
-            fill="transparent"
-            strokeWidth="4"
+            stroke='#69c0ff'
+            fill='transparent'
+            strokeWidth='4'
           />
         }
         <Arc
           largeFlag={ (end < start ? 360 - start + end : end - start) > 180 ? 1 : 0 }
-          startPoint={{ ...getXY(end, props.radius, props.padding) }}
-          endPoint={{ ...getXY(start, props.radius, props.padding) }}
+          startPoint={endPoint}
+          endPoint={startPoint}
           start={start}
           end={end}
           setStart={setStart}
@@ -65,12 +71,12 @@ const CircularSlider = (props: ICircularSlider) => {
         />
         <Handle
           setAngle={setStart}
-          angle={{ ...getXY(start, props.radius, props.padding) }}
+          angle={startPoint}
           center={center}
         />
         <Handle
           setAngle={setEnd}
-          angle={{ ...getXY(end, props.radius, props.padding) }}
+          angle={endPoint}
           center={center}
         />
         <use href='#active' />

@@ -8,12 +8,12 @@ export const Draggable = (props: IDraggable) => {
   const [initial, setInitial] = useState(props.initial)
   const [dragging, setDragging] = useState<boolean>(false)
 
-  const getPosition = (e : React.MouseEvent<SVGElement> |
-    React.TouchEvent<SVGElement> | MouseEvent | TouchEvent) : {x: number, y: number} => {
+  const getPosition = (e : React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement> |
+    MouseEvent | TouchEvent) : {x: number, y: number} => {
     let page : {x: number, y: number} = { x: 0, y: 0 }
-    if (e instanceof TouchEvent) {
+    if ('changedTouches' in e) {
       page = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
-    } else if (e instanceof MouseEvent) {
+    } else if ('pageX' in e) {
       page = { x: e.pageX, y: e.pageY }
     }
     return page

@@ -29,9 +29,9 @@ export const Handle = (props: IHandle) => {
         cx={props.angle.x}
         cy={props.angle.y}
         r={6}
-        stroke="#69c0ff"
-        fill="white"
-        strokeWidth="2"
+        stroke='#69c0ff'
+        fill='white'
+        strokeWidth='2'
       />
     </Draggable>
   )

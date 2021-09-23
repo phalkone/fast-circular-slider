@@ -1,14 +1,14 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface ICircularSlider {
-  /**
+    /**
    * Default start angle
    */
-   start: number,
-   /**
-   * Default end angle
-   */
-   end: number,
+     start: number,
+     /**
+     * Default end angle
+     */
+     end: number,
   /**
    * Radius of the slider
    */
@@ -16,7 +16,15 @@ export interface ICircularSlider {
   /**
    * Padding of the slider element
    */
-  padding: number
+  padding: number,
+  /**
+   * Callback function to get set values
+   */
+  onChange: IOnChange
+}
+
+interface IOnChange {
+  (value : number[]) : any
 }
 
 export interface IPosition {
@@ -98,19 +106,19 @@ export interface IArc {
    /**
    * The end point
    */
-    endPoint: IPosition,
+  endPoint: IPosition,
+  /**
+   * Default start angle
+   */
+   start: number,
+   /**
+   * Default end angle
+   */
+   end: number,
   /**
    * Flag to set correct arc
    */
    largeFlag: number
-   /**
-    * The starting angle
-    */
-   start: number,
-   /**
-    * The ending angle
-    */
-   end: number,
    /**
     * Method to set parent state start angle
     */

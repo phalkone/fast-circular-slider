@@ -4,7 +4,12 @@ import CircularSlider from './components/CircularSlider'
 
 const element = document.createElement('div')
 
-render(
+const App = () => {
+  const handleChange = (value : number[]) => {
+    console.log(`Selected start: ${value[0]} end: ${value[1]}`)
+  }
+
+  return (
   <div style={{ fontFamily: 'Roboto, "Open Sans", sans-serif' }} >
     <div>
         <label style={{
@@ -20,8 +25,11 @@ render(
       padding={8}
       start={320}
       end={40}
+      onChange={handleChange}
     />
   </div>
-  , element)
+  )
+}
 
+render(<App />, element)
 document.body.appendChild(element)
