@@ -35,7 +35,7 @@ import CircularSlider from 'fast-circular-slider'
 
 render(
   <CircularSlider
-      radius={50}
+      radius={55}
       padding={8}
       start={320}
       end={40}
@@ -47,8 +47,8 @@ render(
 
 Prop name | Type | Default | Description
 ----------|------|---------|-------------
-radius  | number | 50 | Radius of the circular slider
-padding | number | 8 | Padding around the slider circle
+radius  | number | 52 | Radius of the circular slider
+padding | number | 12 | Padding around the slider circle
 start | number | 320 | Initial value of the start angle
 end | number | 40 | Initial value of the end angle
 onChange | (value) => void | null | Callback function that is fired when the user changes the slider's value

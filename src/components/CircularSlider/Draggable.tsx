@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import type { IDraggable } from '../../types/CircularSlider.types'
+import type { IDraggable, IPosition, IInitialArc } from '../../types/CircularSlider.types'
 
 /**
  * To make component draggable
  */
 export const Draggable = (props: IDraggable) => {
-  const [initial, setInitial] = useState(props.initial)
+  const [initial, setInitial] = useState<IPosition | IInitialArc>({
+    x: 0, y: 0, start: 0, end: 0, arc: 0
+  })
   const [dragging, setDragging] = useState<boolean>(false)
 
   const getPosition = (e : React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement> |
@@ -62,6 +64,7 @@ export const Draggable = (props: IDraggable) => {
       document.addEventListener('touchmove', onMouseMove)
       document.addEventListener('touchend', onMouseUp)
     }
+    if (props.onDrag) props.onDrag(dragging)
   }, [dragging])
 
   return (
@@ -70,7 +73,7 @@ export const Draggable = (props: IDraggable) => {
       onTouchStart={onMouseDown}
       {...(dragging && props.onTop ? { id: 'active' } : {})}
       >
-      {props.children}
+        {props.children}
     </g>
   )
 }

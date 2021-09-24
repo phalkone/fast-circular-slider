@@ -7,7 +7,7 @@ import { Arc } from './Arc'
 import { DegreeInput } from './DegreeInput'
 
 /**
- * Draws a circular slider for provided relative wind data
+ * Draws a circular slider for provided relative directional data
  * @param {ICircularSlider} props Properties of the CircularSlider as descibed by ICircularSlider.
  */
 const CircularSlider = (props: ICircularSlider) => {
@@ -18,20 +18,20 @@ const CircularSlider = (props: ICircularSlider) => {
   const endPoint = getXY(end, props.radius, props.padding)
 
   useEffect(() => {
-    props.onChange([start, end])
+    if (props.onChange) props.onChange([start, end])
   }, [start, end])
 
   return (
     <div className={styles.container}>
       <DegreeInput
         leftOffset={-40}
-        value={start.toString().padStart(3, '0')}
+        value={start}
         setAngle={setStart}
         center={center}
       />
       <DegreeInput
         leftOffset={3}
-        value={end.toString().padStart(3, '0')}
+        value={end}
         setAngle={setEnd}
         center={center}
       />
@@ -39,23 +39,21 @@ const CircularSlider = (props: ICircularSlider) => {
         version='1.1'
         width={center * 2}
         height={center * 2}
+        className={styles.slider}
       >
         <circle
           cx={center}
           cy={center}
           r={props.radius}
           stroke='#dedede'
-          fill='transparent'
-          strokeWidth='4'
+          className={styles.circle}
         />
         {(start === end || Math.abs(start - end) === 360) &&
           <circle
             cx={center}
             cy={center}
             r={props.radius}
-            stroke='#69c0ff'
-            fill='transparent'
-            strokeWidth='4'
+            className={styles.circle}
           />
         }
         <Arc
@@ -86,8 +84,8 @@ const CircularSlider = (props: ICircularSlider) => {
 }
 
 CircularSlider.defaultProps = {
-  radius: 50,
-  padding: 8,
+  radius: 52,
+  padding: 12,
   start: 320,
   end: 40
 }

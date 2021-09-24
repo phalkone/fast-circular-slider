@@ -21,8 +21,8 @@ const App = () => {
         }}>Wind direction (°)</label>
     </div>
     <CircularSlider
-      radius={50}
-      padding={8}
+      radius={52}
+      padding={12}
       start={320}
       end={40}
       onChange={handleChange}

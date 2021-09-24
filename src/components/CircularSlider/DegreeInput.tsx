@@ -9,9 +9,7 @@ import * as styles from '../../themes/CircularSlider.css'
 export const DegreeInput = (props: IDegreeInput) => {
   const setDegree = (e: ChangeEvent<HTMLInputElement>) => {
     let degree = +e.target.value
-    if (degree > 360) {
-      degree = 360
-    }
+    if (degree > 360) degree = 360
     props.setAngle(degree)
   }
 
@@ -28,7 +26,7 @@ export const DegreeInput = (props: IDegreeInput) => {
           type='number'
           maxLength={3}
           className={styles.input}
-          value={props.value}
+          value={props.value.toString().padStart(3, '0')}
           onChange={setDegree}
         />
       </div>

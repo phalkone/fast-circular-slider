@@ -1,14 +1,14 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface ICircularSlider {
-    /**
+  /**
    * Default start angle
    */
-     start: number,
-     /**
-     * Default end angle
-     */
-     end: number,
+  start: number,
+  /**
+    * Default end angle
+    */
+  end: number,
   /**
    * Radius of the slider
    */
@@ -20,11 +20,7 @@ export interface ICircularSlider {
   /**
    * Callback function to get set values
    */
-  onChange: IOnChange
-}
-
-interface IOnChange {
-  (value : number[]) : any
+  onChange?(value : number[]) : any
 }
 
 export interface IPosition {
@@ -53,15 +49,15 @@ export interface IInitialArc extends IPosition {
   /**
     * The starting angle
     */
-  start?: number,
+  start: number,
    /**
     * The ending angle
     */
-  end?: number,
+  end: number,
    /**
     * Angle of arc at mouse position
     */
-  arc?: number
+  arc: number
 }
 
 export interface IHandle {
@@ -87,7 +83,7 @@ export interface IDegreeInput {
   /**
    * Value of the field
    */
-  value: string,
+  value: number,
   /**
    * To position the input field
    */
@@ -137,27 +133,16 @@ export interface IArc {
   radius: number
 }
 
-interface IMouseDown {
-  (parent: IMousePos) : IPosition | IInitialArc
-}
-
-interface IMouseMove {
-  (x: number, y: number, initial: IPosition | IInitialArc) : void
-}
-
 export interface IDraggable {
-  /**
-   * Initial value for draggable
-   */
-  initial: IPosition | IInitialArc,
   /**
    * Callback method for onMouseDown event
    */
-  onMouseDown: IMouseDown,
+  onMouseDown(parent: IMousePos) : IPosition | IInitialArc,
   /**
    * Callback method for onMouseMove event
    */
-  onMouseMove: IMouseMove,
+  onMouseMove(x: number, y: number, initial: IPosition) : void,
+  onMouseMove(x: number, y: number, initial: IInitialArc) : void,
   /**
    * Children of props
    */
@@ -165,5 +150,9 @@ export interface IDraggable {
   /**
    * If true component will be on top during dragging
    */
-  onTop: boolean
+  onTop?: boolean,
+  /**
+   * Callback function when dragging
+   */
+  onDrag?(dragging: boolean) : void
 }

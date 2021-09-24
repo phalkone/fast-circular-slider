@@ -18,6 +18,34 @@
   content: '°';
 }
 
+.slider {
+  stroke: #91d5ff;
+}
+
+.slider:hover {
+  stroke: #69c0ff;
+}
+
+.handle {
+  fill: white;
+  stroke-width: 2;
+}
+
+.selected {
+  fill:#69c0ff;
+  opacity:0.3;
+}
+
+.circle {
+  fill: transparent;
+  stroke-width: 4;
+}
+
+.arc {
+  fill: none;
+  stroke-width: 4;
+}
+
 input {
   width: 30px;
   height: 20px;

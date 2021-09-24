@@ -2,6 +2,7 @@ import React from 'react'
 import type { IArc, IMousePos, IInitialArc } from '../../types/CircularSlider.types'
 import { getAngle, bound } from '../../utils/CircularSlider.utils'
 import { Draggable } from './Draggable'
+import * as styles from '../../themes/CircularSlider.css'
 
 /**
  * Arc for the slider
@@ -21,29 +22,23 @@ export const Arc = (props: IArc) => {
   }
 
   const onMouseMove = (x: number, y: number, initial: IInitialArc) : void => {
-    if (initial.arc && initial.start && initial.end) {
-      const newAngle = getAngle(x, y, { x: initial.x, y: initial.y })
-      const diff = newAngle - initial.arc
-      const start = bound(initial.start + diff)
-      const end = bound(initial.end + diff)
-      props.setStart(start)
-      props.setEnd(end)
-    }
+    const newAngle = getAngle(x, y, initial)
+    const diff = newAngle - initial.arc
+    const start = bound(initial.start + diff)
+    const end = bound(initial.end + diff)
+    props.setStart(start)
+    props.setEnd(end)
   }
 
   return (
     <Draggable
-    onMouseDown={onMouseDown}
-    onMouseMove={onMouseMove}
-    initial={{ x: 0, y: 0, start: 0, end: 0, arc: 0 }}
-    onTop={false}>
+      onMouseDown={onMouseDown}
+      onMouseMove={onMouseMove}>
       <path
         d={`M ${props.startPoint.x} ${props.startPoint.y} ` +
         `A ${props.radius} ${props.radius} 0 ${props.largeFlag} 0 ` +
         `${props.endPoint.x} ${props.endPoint.y}`}
-        fill='none'
-        stroke='#69c0ff'
-        strokeWidth='4'
+        className={styles.arc}
       />
     </Draggable>
   )
