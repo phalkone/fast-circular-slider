@@ -102,7 +102,7 @@ module.exports = (env, argv) => {
       })
     ]
     config.entry = {
-      Windrose: [
+      CircularSlider: [
         path.resolve(__dirname, '/src/components/CircularSlider')
       ]
     }

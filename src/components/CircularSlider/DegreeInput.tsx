@@ -25,7 +25,7 @@ export const DegreeInput = (props: IDegreeInput) => {
         <input
           type='number'
           maxLength={3}
-          className={styles.input}
+          className={`${styles.input} ${props.selected ? styles.selectedDegree : ''}`}
           value={props.value.toString().padStart(3, '0')}
           onChange={setDegree}
         />

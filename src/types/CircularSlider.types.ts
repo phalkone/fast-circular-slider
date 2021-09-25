@@ -72,7 +72,15 @@ export interface IHandle {
   /**
    * Relative center
    */
-  center: number
+  center: number,
+  /**
+   * Selected callback of the slider
+   */
+   setSelected: Dispatch<SetStateAction<number>>,
+   /**
+   * Id to identify if it is the start or end handle
+   */
+    id: number
 }
 
 export interface IDegreeInput {
@@ -91,7 +99,11 @@ export interface IDegreeInput {
   /**
    * Relative center
    */
-  center: number
+  center: number,
+  /**
+   * Indicates to highlight textfield
+   */
+  selected?: boolean
 }
 
 export interface IArc {
@@ -130,7 +142,11 @@ export interface IArc {
   /**
    * Radius of the circle
    */
-  radius: number
+  radius: number,
+  /**
+   * Selected callback of the slider
+   */
+   setSelected: Dispatch<SetStateAction<number>>,
 }
 
 export interface IDraggable {

@@ -12,8 +12,9 @@ import { DegreeInput } from './DegreeInput'
  */
 const CircularSlider = (props: ICircularSlider) => {
   const center = props.radius + props.padding
-  const [start, setStart] = useState(props.start)
-  const [end, setEnd] = useState(props.end)
+  const [start, setStart] = useState<number>(props.start)
+  const [end, setEnd] = useState<number>(props.end)
+  const [selectedHandle, setSelectedHandle] = useState<number>(0)
   const startPoint = getXY(start, props.radius, props.padding)
   const endPoint = getXY(end, props.radius, props.padding)
 
@@ -28,12 +29,14 @@ const CircularSlider = (props: ICircularSlider) => {
         value={start}
         setAngle={setStart}
         center={center}
+        {...((selectedHandle === 1 || selectedHandle === 3) && { selected: true })}
       />
       <DegreeInput
         leftOffset={3}
         value={end}
         setAngle={setEnd}
         center={center}
+        {...((selectedHandle === 2 || selectedHandle === 3) && { selected: true })}
       />
       <svg
         version='1.1'
@@ -66,16 +69,21 @@ const CircularSlider = (props: ICircularSlider) => {
           setEnd={setEnd}
           radius={props.radius}
           center={center}
+          setSelected={setSelectedHandle}
         />
         <Handle
+          id={1}
           setAngle={setStart}
           angle={startPoint}
           center={center}
+          setSelected={setSelectedHandle}
         />
         <Handle
+          id={2}
           setAngle={setEnd}
           angle={endPoint}
           center={center}
+          setSelected={setSelectedHandle}
         />
         <use href='#active' />
       </svg>

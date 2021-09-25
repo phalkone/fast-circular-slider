@@ -23,6 +23,7 @@ export const Handle = (props: IHandle) => {
 
   const onDrag = (dragging: boolean) : void => {
     setSelected(dragging)
+    props.setSelected(dragging ? props.id : 0)
   }
 
   return (

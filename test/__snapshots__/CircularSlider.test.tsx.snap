@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render a circular slider 1`] = `
+<div>
+  <div
+    style={
+      Object {
+        "left": "24px",
+        "top": "52px",
+      }
+    }
+  >
+    <div>
+      <input
+        maxLength={3}
+        onChange={[Function]}
+        type="number"
+        value="320"
+      />
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "left": "67px",
+        "top": "52px",
+      }
+    }
+  >
+    <div>
+      <input
+        maxLength={3}
+        onChange={[Function]}
+        type="number"
+        value="040"
+      />
+    </div>
+  </div>
+  <svg
+    height={128}
+    version="1.1"
+    width={128}
+  >
+    <circle
+      cx={64}
+      cy={64}
+      r={52}
+      stroke="#dedede"
+    />
+    <g
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+    >
+      <path
+        d="M 97.42495570370005 24.165688957813146 A 52 52 0 0 0 30.575044296299943 24.165688957813153"
+      />
+    </g>
+    <g
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+    >
+      <circle
+        cx={30.575044296299943}
+        cy={24.165688957813153}
+        r={6}
+      />
+    </g>
+    <g
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+    >
+      <circle
+        cx={97.42495570370005}
+        cy={24.165688957813146}
+        r={6}
+      />
+    </g>
+    <use
+      href="#active"
+    />
+  </svg>
+</div>
+`;

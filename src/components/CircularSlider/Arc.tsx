@@ -30,10 +30,15 @@ export const Arc = (props: IArc) => {
     props.setEnd(end)
   }
 
+  const onDrag = (dragging: boolean) : void => {
+    props.setSelected(dragging ? 3 : 0)
+  }
+
   return (
     <Draggable
       onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}>
+      onMouseMove={onMouseMove}
+      onDrag={onDrag}>
       <path
         d={`M ${props.startPoint.x} ${props.startPoint.y} ` +
         `A ${props.radius} ${props.radius} 0 ${props.largeFlag} 0 ` +

@@ -2,6 +2,34 @@
   position:relative;
 }
 
+.slider {
+  stroke: #91d5ff;
+}
+
+.slider:hover {
+  stroke: #69c0ff;
+}
+
+.handle {
+  fill: white;
+  stroke-width: 2;
+}
+
+.selected {
+  fill:#69c0ff;
+  opacity:0.2;
+}
+
+.circle {
+  fill: transparent;
+  stroke-width: 4;
+}
+
+.arc {
+  fill: none;
+  stroke-width: 4;
+}
+
 .degreeField {
   position: absolute;
 }
@@ -18,35 +46,7 @@
   content: '°';
 }
 
-.slider {
-  stroke: #91d5ff;
-}
-
-.slider:hover {
-  stroke: #69c0ff;
-}
-
-.handle {
-  fill: white;
-  stroke-width: 2;
-}
-
-.selected {
-  fill:#69c0ff;
-  opacity:0.3;
-}
-
-.circle {
-  fill: transparent;
-  stroke-width: 4;
-}
-
-.arc {
-  fill: none;
-  stroke-width: 4;
-}
-
-input {
+.input {
   width: 30px;
   height: 20px;
   padding:1px 2px;
@@ -58,20 +58,22 @@ input {
   font-size:14px;
 }
 
-input:hover {
-  border: 1px solid #40a9ff;
+.selectedDegree,
+.input:focus {
+  border: 1px solid #69c0ff;
 }
 
-input:focus {
-  border: 1px solid #40a9ff;
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%)
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+.input[type=number] {
   -moz-appearance: textfield;
 }

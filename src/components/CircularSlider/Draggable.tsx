@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import type { IDraggable, IPosition, IInitialArc } from '../../types/CircularSlider.types'
+import { getPosition } from '../../utils/CircularSlider.utils'
 
 /**
  * To make component draggable
@@ -9,17 +10,6 @@ export const Draggable = (props: IDraggable) => {
     x: 0, y: 0, start: 0, end: 0, arc: 0
   })
   const [dragging, setDragging] = useState<boolean>(false)
-
-  const getPosition = (e : React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement> |
-    MouseEvent | TouchEvent) : {x: number, y: number} => {
-    let page : {x: number, y: number} = { x: 0, y: 0 }
-    if ('changedTouches' in e) {
-      page = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY }
-    } else if ('pageX' in e) {
-      page = { x: e.pageX, y: e.pageY }
-    }
-    return page
-  }
 
   const onMouseDown = (e : React.MouseEvent<SVGElement> | React.TouchEvent<SVGElement>) : void => {
     const page = getPosition(e)
