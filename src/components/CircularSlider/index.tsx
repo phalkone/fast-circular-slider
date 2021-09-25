@@ -48,17 +48,8 @@ const CircularSlider = (props: ICircularSlider) => {
           cx={center}
           cy={center}
           r={props.radius}
-          stroke='#dedede'
-          className={styles.circle}
+          className={`${styles.circle} ${styles.backgroundCircle}`}
         />
-        {(start === end || Math.abs(start - end) === 360) &&
-          <circle
-            cx={center}
-            cy={center}
-            r={props.radius}
-            className={styles.circle}
-          />
-        }
         <Arc
           largeFlag={ (end < start ? 360 - start + end : end - start) > 180 ? 1 : 0 }
           startPoint={endPoint}
@@ -85,7 +76,7 @@ const CircularSlider = (props: ICircularSlider) => {
           center={center}
           setSelected={setSelectedHandle}
         />
-        <use href='#active' />
+        <use href='#active-handle' />
       </svg>
     </div>
   )

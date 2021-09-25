@@ -45,6 +45,14 @@ export const Arc = (props: IArc) => {
         `${props.endPoint.x} ${props.endPoint.y}`}
         className={styles.arc}
       />
+      {(props.start === props.end || Math.abs(props.start - props.end) === 360) &&
+        <circle
+          cx={props.center}
+          cy={props.center}
+          r={props.radius}
+          className={styles.circle}
+        />
+      }
     </Draggable>
   )
 }

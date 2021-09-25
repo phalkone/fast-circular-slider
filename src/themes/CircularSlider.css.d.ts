@@ -8,3 +8,4 @@ export const circle: string
 export const handle : string
 export const arc : string
 export const selected : string
+export const backgroundCircle : string

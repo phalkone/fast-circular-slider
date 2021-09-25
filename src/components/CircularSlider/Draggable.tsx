@@ -61,7 +61,7 @@ export const Draggable = (props: IDraggable) => {
     <g
       onMouseDown={onMouseDown}
       onTouchStart={onMouseDown}
-      {...(dragging && props.onTop ? { id: 'active' } : {})}
+      {...(dragging && props.onTop ? { id: 'active-handle' } : {})}
       >
         {props.children}
     </g>

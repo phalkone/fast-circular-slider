@@ -25,6 +25,10 @@
   stroke-width: 4;
 }
 
+.backgroundCircle {
+  stroke: #dedede;
+}
+
 .arc {
   fill: none;
   stroke-width: 4;
