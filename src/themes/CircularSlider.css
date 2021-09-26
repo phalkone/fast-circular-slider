@@ -1,12 +1,11 @@
 .container {
   position:relative;
-}
-
-.slider {
   stroke: #91d5ff;
+  width: fit-content;
+  height: fit-content;
 }
 
-.slider:hover {
+.container:hover {
   stroke: #69c0ff;
 }
 
