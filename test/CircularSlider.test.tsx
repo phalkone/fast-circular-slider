@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
-import { act, Simulate } from 'react-dom/test-utils'
+import { act } from 'react-dom/test-utils'
 import renderer from 'react-test-renderer'
 import CircularSlider from '../src/components/CircularSlider'
 
