@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import type { ICircularSlider } from '../../types/CircularSlider.types'
+import _uniqueId from 'lodash/uniqueId'
 import { getXY } from '../../utils/CircularSlider.utils'
 import * as styles from '../../themes/CircularSlider.css'
 import { Handle } from './Handle'
@@ -14,6 +15,7 @@ const CircularSlider = (props: ICircularSlider) => {
   const center = props.radius + props.padding
   const [value, setValue] = useState<[number, number]>(props.value ? props.value : props.defaultValue)
   const [selectedHandle, setSelectedHandle] = useState<number>(0)
+  const id = useRef<string>(_uniqueId('active-handle-circular-slider-'))
   const startPoint = getXY(value[0], props.radius, props.padding)
   const endPoint = getXY(value[1], props.radius, props.padding)
 
@@ -74,6 +76,7 @@ const CircularSlider = (props: ICircularSlider) => {
           angle={startPoint}
           center={center}
           setSelected={setSelectedHandle}
+          onTop={id.current}
         />
         <Handle
           id={2}
@@ -81,8 +84,9 @@ const CircularSlider = (props: ICircularSlider) => {
           angle={endPoint}
           center={center}
           setSelected={setSelectedHandle}
+          onTop={id.current}
         />
-        <use href='#active-handle' />
+        <use href={`${id.current}`}/>
       </svg>
     </div>
   )

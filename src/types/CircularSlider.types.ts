@@ -85,7 +85,11 @@ export interface IHandle {
    /**
    * Id to identify if it is the start or end handle
    */
-    id: number
+    id: number,
+  /**
+   * Id to put handle on top
+   */
+  onTop: string
 }
 
 export interface IDegreeInput {
@@ -163,7 +167,7 @@ export interface IDraggable {
   /**
    * If true component will be on top during dragging
    */
-  onTop?: boolean,
+  onTop?: string,
   /**
    * Callback function when dragging
    */

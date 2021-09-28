@@ -30,7 +30,7 @@ export const Handle = (props: IHandle) => {
     <Draggable
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
-      onTop
+      onTop={props.onTop}
       onDrag={onDrag}>
       {selected &&
         <circle

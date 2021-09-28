@@ -42,7 +42,7 @@ const handleChange = (value : [number, number]) => {
 render(
   <CircularSlider
       radius={55}
-      padding={8}
+      padding={12}
       value={value}
       onChange={handleChange}
   />, document.getElementById('root'))
