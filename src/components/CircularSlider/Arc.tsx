@@ -15,8 +15,8 @@ export const Arc = (props: IArc) => {
     }
     return {
       ...initialCenter,
-      start: props.start,
-      end: props.end,
+      start: props.value[0],
+      end: props.value[1],
       arc: getAngle(parent.pageX, parent.pageY, initialCenter)
     }
   }
@@ -24,10 +24,8 @@ export const Arc = (props: IArc) => {
   const onMouseMove = (x: number, y: number, initial: IInitialArc) : void => {
     const newAngle = getAngle(x, y, initial)
     const diff = newAngle - initial.arc
-    const start = bound(initial.start + diff)
-    const end = bound(initial.end + diff)
-    props.setStart(start)
-    props.setEnd(end)
+    const value : [number, number] = [bound(initial.start + diff), bound(initial.end + diff)]
+    props.setValue(value)
   }
 
   const onDrag = (dragging: boolean) : void => {
@@ -45,7 +43,7 @@ export const Arc = (props: IArc) => {
         `${props.endPoint.x} ${props.endPoint.y}`}
         className={styles.arc}
       />
-      {(props.start === props.end || Math.abs(props.start - props.end) === 360) &&
+      {(props.value[0] === props.value[1] || Math.abs(props.value[0] - props.value[1]) === 360) &&
         <circle
           cx={props.center}
           cy={props.center}

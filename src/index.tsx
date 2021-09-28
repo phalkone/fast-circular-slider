@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from 'react-dom'
 import CircularSlider from './components/CircularSlider'
 
 const element = document.createElement('div')
 
 const App = () => {
-  const handleChange = (value : number[]) => {
-    console.log(`Selected start: ${value[0]} end: ${value[1]}`)
+  const [value, setValue] = useState<[number, number]>([320, 40])
+
+  const handleChange = (value : [number, number]) => {
+    setValue(value)
   }
 
   return (
@@ -22,9 +24,7 @@ const App = () => {
     </div>
     <CircularSlider
       radius={52}
-      padding={12}
-      start={320}
-      end={40}
+      value={value}
       onChange={handleChange}
     />
   </div>

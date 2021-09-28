@@ -20,8 +20,7 @@ it('change value of first degree field', () => {
     render(<CircularSlider
       radius={52}
       padding={12}
-      start={320}
-      end={40}
+      value={[320, 40]}
     />, container)
   })
 
@@ -35,8 +34,7 @@ test('Render a circular slider', () => {
     <CircularSlider
       radius={52}
       padding={12}
-      start={320}
-      end={40}
+      value={[320, 40]}
     />
   )
   const tree = comp.toJSON()

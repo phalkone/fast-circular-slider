@@ -12,28 +12,36 @@ import { DegreeInput } from './DegreeInput'
  */
 const CircularSlider = (props: ICircularSlider) => {
   const center = props.radius + props.padding
-  const [start, setStart] = useState<number>(props.start)
-  const [end, setEnd] = useState<number>(props.end)
+  const [value, setValue] = useState<[number, number]>(props.value ? props.value : props.defaultValue)
   const [selectedHandle, setSelectedHandle] = useState<number>(0)
-  const startPoint = getXY(start, props.radius, props.padding)
-  const endPoint = getXY(end, props.radius, props.padding)
+  const startPoint = getXY(value[0], props.radius, props.padding)
+  const endPoint = getXY(value[1], props.radius, props.padding)
 
   useEffect(() => {
-    if (props.onChange) props.onChange([start, end])
-  }, [start, end])
+    if (props.onChange) props.onChange(value)
+  }, value)
+
+  const setStart = (start: number) => {
+    setValue([start, value[1]])
+  }
+
+  const setEnd = (end: number) => {
+    setValue([value[0], end])
+  }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container}
+         style={props.style}>
       <DegreeInput
         leftOffset={-40}
-        value={start}
+        value={value[0]}
         setAngle={setStart}
         center={center}
         {...((selectedHandle === 1 || selectedHandle === 3) && { selected: true })}
       />
       <DegreeInput
         leftOffset={3}
-        value={end}
+        value={value[1]}
         setAngle={setEnd}
         center={center}
         {...((selectedHandle === 2 || selectedHandle === 3) && { selected: true })}
@@ -51,13 +59,11 @@ const CircularSlider = (props: ICircularSlider) => {
           className={`${styles.circle} ${styles.backgroundCircle}`}
         />
         <Arc
-          largeFlag={ (end < start ? 360 - start + end : end - start) > 180 ? 1 : 0 }
+          largeFlag={ (value[1] < value[0] ? 360 - value[0] + value[1] : value[1] - value[0]) > 180 ? 1 : 0 }
           startPoint={endPoint}
           endPoint={startPoint}
-          start={start}
-          end={end}
-          setStart={setStart}
-          setEnd={setEnd}
+          value={value}
+          setValue={setValue}
           radius={props.radius}
           center={center}
           setSelected={setSelectedHandle}
@@ -85,8 +91,7 @@ const CircularSlider = (props: ICircularSlider) => {
 CircularSlider.defaultProps = {
   radius: 52,
   padding: 12,
-  start: 320,
-  end: 40
+  defaultValue: [320, 40]
 }
 
 export default CircularSlider

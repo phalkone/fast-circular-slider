@@ -1,14 +1,15 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import React from 'react'
 
 export interface ICircularSlider {
   /**
-   * Default start angle
+   * Value of the slider
    */
-  start: number,
+  value?: [number, number]
   /**
-    * Default end angle
-    */
-  end: number,
+   * Default value of the slider
+   */
+  defaultValue: [number, number]
   /**
    * Radius of the slider
    */
@@ -20,7 +21,11 @@ export interface ICircularSlider {
   /**
    * Callback function to get set values
    */
-  onChange?(value : number[]) : any
+  onChange?(value : [number, number]) : any
+  /**
+   * Pass a custom style
+   */
+   style? : React.CSSProperties
 }
 
 export interface IPosition {
@@ -64,7 +69,7 @@ export interface IHandle {
   /**
    * Angle callback of the slider
    */
-  setAngle: Dispatch<SetStateAction<number>>,
+  setAngle: (value: number) => void,
   /**
    * Properties of the handle
    */
@@ -87,7 +92,7 @@ export interface IDegreeInput {
   /**
    * Angle callback of the slider
    */
-  setAngle: Dispatch<SetStateAction<number>>,
+  setAngle: (value: number) => void,
   /**
    * Value of the field
    */
@@ -116,13 +121,9 @@ export interface IArc {
    */
   endPoint: IPosition,
   /**
-   * Default start angle
+   * Value of the slider
    */
-   start: number,
-   /**
-   * Default end angle
-   */
-   end: number,
+   value: [number, number],
   /**
    * Flag to set correct arc
    */
@@ -130,11 +131,7 @@ export interface IArc {
    /**
     * Method to set parent state start angle
     */
-   setStart: Dispatch<SetStateAction<number>>,
-  /**
-    * Method to set parent state end angle
-    */
-   setEnd: Dispatch<SetStateAction<number>>,
+   setValue: Dispatch<SetStateAction<[number, number]>>,
   /**
    * Relative center
    */
