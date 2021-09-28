@@ -1,22 +1,29 @@
-import React from 'react'
-import type { IArc, IMousePos, IInitialArc } from '../../types/CircularSlider.types'
+import React, { useContext } from 'react'
+import type { IMousePos, IInitialArc } from '../../types/CircularSlider.types'
 import { getAngle, bound } from '../../utils/CircularSlider.utils'
 import { Draggable } from './Draggable'
+import { CircularSliderContext } from '.'
 import * as styles from '../../themes/CircularSlider.css'
 
 /**
  * Arc for the slider
  */
-export const Arc = (props: IArc) => {
+export const Arc = () => {
+  const context = useContext(CircularSliderContext)
+  const start = context.value[0]
+  const end = context.value[1]
+  const largeFlag = (end < start ? 360 - start + end : end - start) > 180 ? 1 : 0
+  console.log(largeFlag)
+
   const onMouseDown = (parent : IMousePos) : IInitialArc => {
     const initialCenter = {
-      x: parent.x + props.center,
-      y: parent.y + props.center
+      x: parent.x + context.center,
+      y: parent.y + context.center
     }
     return {
       ...initialCenter,
-      start: props.value[0],
-      end: props.value[1],
+      start: start,
+      end: end,
       arc: getAngle(parent.pageX, parent.pageY, initialCenter)
     }
   }
@@ -25,11 +32,11 @@ export const Arc = (props: IArc) => {
     const newAngle = getAngle(x, y, initial)
     const diff = newAngle - initial.arc
     const value : [number, number] = [bound(initial.start + diff), bound(initial.end + diff)]
-    props.setValue(value)
+    context.setValue(value)
   }
 
   const onDrag = (dragging: boolean) : void => {
-    props.setSelected(dragging ? 3 : 0)
+    context.setSelectedHandle(dragging ? 2 : 3)
   }
 
   return (
@@ -38,16 +45,16 @@ export const Arc = (props: IArc) => {
       onMouseMove={onMouseMove}
       onDrag={onDrag}>
       <path
-        d={`M ${props.startPoint.x} ${props.startPoint.y} ` +
-        `A ${props.radius} ${props.radius} 0 ${props.largeFlag} 0 ` +
-        `${props.endPoint.x} ${props.endPoint.y}`}
+        d={`M ${context.points[1].x} ${context.points[1].y} ` +
+        `A ${context.radius} ${context.radius} 0 ${largeFlag} 0 ` +
+        `${context.points[0].x} ${context.points[0].y}`}
         className={styles.arc}
       />
-      {(props.value[0] === props.value[1] || Math.abs(props.value[0] - props.value[1]) === 360) &&
+      {(start === end || Math.abs(start - end) === 360) &&
         <circle
-          cx={props.center}
-          cy={props.center}
-          r={props.radius}
+          cx={context.center}
+          cy={context.center}
+          r={context.radius}
           className={styles.circle}
         />
       }

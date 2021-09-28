@@ -1,7 +1,18 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import React from 'react'
 
-export interface ICircularSlider {
+interface ICommon {
+  /**
+   * Radius of the slider
+   */
+  radius: number,
+  /**
+   * Disable the slider
+   */
+  disabled: boolean
+}
+
+export interface ICircularSlider extends ICommon {
   /**
    * Value of the slider
    */
@@ -10,10 +21,7 @@ export interface ICircularSlider {
    * Default value of the slider
    */
   defaultValue: [number, number]
-  /**
-   * Radius of the slider
-   */
-  radius: number,
+  ,
   /**
    * Callback function to get set values
    */
@@ -21,11 +29,38 @@ export interface ICircularSlider {
   /**
    * Pass a custom style
    */
-   style?: React.CSSProperties,
+   style?: React.CSSProperties
+}
+
+export interface ICircularSliderContext extends ICommon {
   /**
-   * Disable the slider
+   * Relative center
    */
-  disabled?: boolean
+  center: number,
+  /**
+   * Value of the slider
+   */
+  value: [number, number],
+  /**
+    * Method to set parent state start angle
+    */
+  setValue: Dispatch<SetStateAction<[number, number]>>,
+  /**
+    * Id of selected handle
+    */
+  selectedHandle: number,
+  /**
+   * Method to set parent state start angle
+   */
+  setSelectedHandle: Dispatch<SetStateAction<number>>,
+  /**
+   * The start and end point
+   */
+  points: [IPosition, IPosition]
+  /**
+   * Id to put svg element on top
+   */
+   onTop: string
 }
 
 export interface IPosition {
@@ -66,88 +101,21 @@ export interface IInitialArc extends IPosition {
 }
 
 export interface IHandle {
-  /**
-   * Angle callback of the slider
-   */
-  setAngle: (value: number) => void,
-  /**
-   * Properties of the handle
-   */
-  angle : IPosition,
-  /**
-   * Relative center
-   */
-  center: number,
-  /**
-   * Selected callback of the slider
-   */
-   setSelected: Dispatch<SetStateAction<number>>,
    /**
    * Id to identify if it is the start or end handle
    */
-    id: number,
-  /**
-   * Id to put handle on top
-   */
-  onTop: string
+    id: number
 }
 
 export interface IDegreeInput {
   /**
-   * Angle callback of the slider
+   * Id of degree field
    */
-  setAngle: (value: number) => void,
-  /**
-   * Value of the field
-   */
-  value: number,
+  id: number,
   /**
    * To position the input field
    */
-  leftOffset: number
-  /**
-   * Relative center
-   */
-  center: number,
-  /**
-   * Indicates to highlight textfield
-   */
-  selected?: boolean
-}
-
-export interface IArc {
-  /**
-   * The start point
-   */
-   startPoint: IPosition,
-   /**
-   * The end point
-   */
-  endPoint: IPosition,
-  /**
-   * Value of the slider
-   */
-   value: [number, number],
-  /**
-   * Flag to set correct arc
-   */
-   largeFlag: number
-   /**
-    * Method to set parent state start angle
-    */
-   setValue: Dispatch<SetStateAction<[number, number]>>,
-  /**
-   * Relative center
-   */
-  center: number,
-  /**
-   * Radius of the circle
-   */
-  radius: number,
-  /**
-   * Selected callback of the slider
-   */
-   setSelected: Dispatch<SetStateAction<number>>,
+  leftOffset: number,
 }
 
 export interface IDraggable {
