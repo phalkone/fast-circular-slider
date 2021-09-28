@@ -27,7 +27,9 @@ const App = () => {
       value={value}
       onChange={handleChange}
     />
-    <CircularSlider />
+    <CircularSlider
+      defaultValue={[270, 90]}
+    />
   </div>
   )
 }

@@ -15,17 +15,17 @@ export interface ICircularSlider {
    */
   radius: number,
   /**
-   * Padding of the slider element
-   */
-  padding: number,
-  /**
    * Callback function to get set values
    */
   onChange?(value : [number, number]) : any
   /**
    * Pass a custom style
    */
-   style? : React.CSSProperties
+   style?: React.CSSProperties,
+  /**
+   * Disable the slider
+   */
+  disabled?: boolean
 }
 
 export interface IPosition {

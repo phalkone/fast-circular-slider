@@ -19,7 +19,6 @@ it('change value of first degree field', () => {
   act(() => {
     render(<CircularSlider
       radius={52}
-      padding={12}
       value={[320, 40]}
     />, container)
   })
@@ -33,7 +32,6 @@ test('Render a circular slider', () => {
   const comp = renderer.create(
     <CircularSlider
       radius={52}
-      padding={12}
       value={[320, 40]}
     />
   )

@@ -12,12 +12,12 @@ import { DegreeInput } from './DegreeInput'
  * @param {ICircularSlider} props Properties of the CircularSlider as descibed by ICircularSlider.
  */
 const CircularSlider = (props: ICircularSlider) => {
-  const center = props.radius + props.padding
   const [value, setValue] = useState<[number, number]>(props.value ? props.value : props.defaultValue)
   const [selectedHandle, setSelectedHandle] = useState<number>(0)
   const id = useRef<string>(_uniqueId('active-handle-circular-slider-'))
-  const startPoint = getXY(value[0], props.radius, props.padding)
-  const endPoint = getXY(value[1], props.radius, props.padding)
+  const startPoint = getXY(value[0], props.radius, 12)
+  const endPoint = getXY(value[1], props.radius, 12)
+  const center = props.radius + 12
 
   useEffect(() => {
     if (props.onChange) props.onChange(value)
@@ -32,69 +32,69 @@ const CircularSlider = (props: ICircularSlider) => {
   }
 
   return (
-    <div className={styles.container}
-         style={props.style}>
-      <DegreeInput
-        leftOffset={-40}
-        value={value[0]}
-        setAngle={setStart}
-        center={center}
-        {...((selectedHandle === 1 || selectedHandle === 3) && { selected: true })}
-      />
-      <DegreeInput
-        leftOffset={3}
-        value={value[1]}
-        setAngle={setEnd}
-        center={center}
-        {...((selectedHandle === 2 || selectedHandle === 3) && { selected: true })}
-      />
-      <svg
-        version='1.1'
-        width={center * 2}
-        height={center * 2}
-        className={styles.slider}
-      >
-        <circle
-          cx={center}
-          cy={center}
-          r={props.radius}
-          className={`${styles.circle} ${styles.backgroundCircle}`}
-        />
-        <Arc
-          largeFlag={ (value[1] < value[0] ? 360 - value[0] + value[1] : value[1] - value[0]) > 180 ? 1 : 0 }
-          startPoint={endPoint}
-          endPoint={startPoint}
-          value={value}
-          setValue={setValue}
-          radius={props.radius}
-          center={center}
-          setSelected={setSelectedHandle}
-        />
-        <Handle
-          id={1}
+    <div style={props.style}>
+      <div className={styles.container}>
+        <DegreeInput
+          leftOffset={-40}
+          value={value[0]}
           setAngle={setStart}
-          angle={startPoint}
           center={center}
-          setSelected={setSelectedHandle}
-          onTop={id.current}
+          {...((selectedHandle === 1 || selectedHandle === 3) && { selected: true })}
         />
-        <Handle
-          id={2}
+        <DegreeInput
+          leftOffset={3}
+          value={value[1]}
           setAngle={setEnd}
-          angle={endPoint}
           center={center}
-          setSelected={setSelectedHandle}
-          onTop={id.current}
+          {...((selectedHandle === 2 || selectedHandle === 3) && { selected: true })}
         />
-        <use href={`${id.current}`}/>
-      </svg>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={center * 2}
+          height={center * 2}
+          className={styles.slider}
+        >
+          <circle
+            cx={center}
+            cy={center}
+            r={props.radius}
+            className={`${styles.circle} ${styles.backgroundCircle}`}
+          />
+          <Arc
+            largeFlag={ (value[1] < value[0] ? 360 - value[0] + value[1] : value[1] - value[0]) > 180 ? 1 : 0 }
+            startPoint={endPoint}
+            endPoint={startPoint}
+            value={value}
+            setValue={setValue}
+            radius={props.radius}
+            center={center}
+            setSelected={setSelectedHandle}
+          />
+          <Handle
+            id={1}
+            setAngle={setStart}
+            angle={startPoint}
+            center={center}
+            setSelected={setSelectedHandle}
+            onTop={id.current}
+          />
+          <Handle
+            id={2}
+            setAngle={setEnd}
+            angle={endPoint}
+            center={center}
+            setSelected={setSelectedHandle}
+            onTop={id.current}
+          />
+          <use href={`${id.current}`}/>
+        </svg>
+      </div>
     </div>
   )
 }
 
 CircularSlider.defaultProps = {
   radius: 52,
-  padding: 12,
   defaultValue: [320, 40]
 }
 

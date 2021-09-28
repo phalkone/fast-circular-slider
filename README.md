@@ -42,8 +42,8 @@ const handleChange = (value : [number, number]) => {
 render(
   <CircularSlider
       radius={55}
-      padding={12}
       value={value}
+      defaultValue={[320, 40]}
       onChange={handleChange}
   />, document.getElementById('root'))
 ```
@@ -53,7 +53,6 @@ render(
 Prop name | Type | Default | Description
 ----------|------|---------|-------------
 radius  | number | 52 | Radius of the circular slider
-padding | number | 12 | Padding around the slider circle
 value | [number, number] | - | The value of the slider
 defaultValue | [number, number] | [320, 40] | The default value of the slider
 onChange | (value) => void | null | Callback function that is fired when the user changes the slider's value
