@@ -1,7 +1,7 @@
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
 import React from 'react'
 
-interface ICommon {
+export interface ICircularSlider {
   /**
    * Radius of the circle
    */
@@ -14,17 +14,38 @@ interface ICommon {
    * Disable the slider
    */
   disabled: boolean,
-  sliderColor: string,
-  disabledColor: string,
-  hoverColor: string,
+  /**
+   * Color of the circle
+   */
   circleColor: string,
+  /**
+   * Color of the slider when enabled
+   */
+  sliderColor: string,
+  /**
+   * Color of the slider when disabled
+   */
+  disabledColor: string,
+  /**
+   * Color of the slider on hover
+   */
+  hoverColor: string,
+  /**
+   * Color when the degree input field is in focus
+   */
   focusColor: string,
+  /**
+   * Stroke width of the arc
+   */
   arcWidth: number,
+  /**
+   * Stroke of of the circle
+   */
   circleWidth: number,
+  /**
+   * Stroke width of the handle
+   */
   handleWidth: number
-}
-
-export interface ICircularSlider extends ICommon {
   /**
    * Value of the slider
    */
@@ -44,114 +65,82 @@ export interface ICircularSlider extends ICommon {
    style?: React.CSSProperties
 }
 
-export interface ICircularSliderContext extends ICommon {
-  /**
-   * Relative center
-   */
-  center: number,
-  /**
-   * Value of the slider
-   */
-  value: [number, number],
-  /**
-    * Method to set parent state start angle
-    */
-  setValue: Dispatch<SetStateAction<[number, number]>>,
-  /**
-    * Id of selected handle
-    */
-  selectedHandle: number,
-  /**
-   * Method to set parent state start angle
-   */
-  setSelectedHandle: Dispatch<SetStateAction<number>>,
-  /**
-   * The start and end point
-   */
-  points: [IPosition, IPosition]
-  /**
-   * Id to put svg element on top
-   */
-   onTop: string,
-   hover: boolean,
-   setHover: Dispatch<SetStateAction<boolean>>
-}
-
 export interface IPosition {
-  /**
-   * x coordinate
-   */
   x: number,
-  /**
-   * y coordinate
-   */
   y: number,
 }
 
 export interface IMousePos extends IPosition {
-  /**
-   * Mouse x coordinate
-   */
   pageX: number,
-  /**
-   * Mouse y coordinate
-   */
   pageY: number
 }
 
 export interface IInitialArc extends IPosition {
-  /**
-    * The starting angle
-    */
   start: number,
-   /**
-    * The ending angle
-    */
   end: number,
-   /**
-    * Angle of arc at mouse position
-    */
   arc: number
 }
 
+export interface IArc {
+  center: number,
+  value: [number, number],
+  points: [IPosition, IPosition],
+  hover: boolean,
+  setHover: Dispatch<SetStateAction<boolean>>,
+  setValue: Dispatch<SetStateAction<[number, number]>>,
+  selectedHandle: number,
+  setSelectedHandle: Dispatch<SetStateAction<number>>,
+  style: {
+    disabled: boolean,
+    hoverColor: string,
+    sliderColor: string,
+    disabledColor: string,
+    arcWidth: number,
+    circleRadius: number
+  }
+}
+
 export interface IHandle {
-   /**
-   * Id to identify if it is the start or end handle
-   */
-    id: number
+  id: number,
+  center: number,
+  value: number,
+  setValue: (value: number) => void,
+  hover: boolean,
+  setHover: Dispatch<SetStateAction<boolean>>,
+  selectedHandle: number,
+  setSelectedHandle: Dispatch<SetStateAction<number>>,
+  onTop: string,
+  point: IPosition,
+  style: {
+    disabled: boolean,
+    hoverColor: string,
+    sliderColor: string,
+    disabledColor: string,
+    handleWidth: number,
+    handleRadius: number
+  }
 }
 
 export interface IDegreeInput {
-  /**
-   * Id of degree field
-   */
   id: number,
-  /**
-   * To position the input field
-   */
   leftOffset: number,
+  value: number,
+  setValue: (value: number) => void,
+  center: number,
+  selectedHandle: number,
+  setSelectedHandle: Dispatch<SetStateAction<number>>,
+  style: {
+    circleColor: string,
+    hoverColor: string,
+    disabled: boolean
+  }
 }
 
 export interface IDraggable {
-  /**
-   * Callback method for onMouseDown event
-   */
   onMouseDown(parent: IMousePos) : IPosition | IInitialArc,
-  /**
-   * Callback method for onMouseMove event
-   */
   onMouseMove(x: number, y: number, initial: IPosition) : void,
   onMouseMove(x: number, y: number, initial: IInitialArc) : void,
-  /**
-   * Children of props
-   */
-  children: ReactNode,
-  /**
-   * If true component will be on top during dragging
-   */
-  onTop?: string,
-  /**
-   * Callback function when dragging
-   */
   onDrag?(dragging: boolean) : void
+  children: ReactNode,
+  onTop?: string,
 }

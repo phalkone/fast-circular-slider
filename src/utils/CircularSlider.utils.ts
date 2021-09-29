@@ -1,9 +1,7 @@
 import type React from 'react'
+import type { IPosition } from '../types/CircularSlider.types'
 
-export const getXY = (angle : number, radius: number, padding: number) : {
-  x: number,
-  y : number
-} => {
+export const getXY = (angle : number, radius: number, padding: number) : IPosition => {
   const a = toRad(angle)
   const x = radius + padding + (Math.sin(a) * radius)
   const y = radius + padding - (Math.cos(a) * radius)
