@@ -3,13 +3,25 @@ import React from 'react'
 
 interface ICommon {
   /**
-   * Radius of the slider
+   * Radius of the circle
    */
-  radius: number,
+  circleRadius: number,
+  /**
+   * Radius of the handle
+   */
+  handleRadius: number,
   /**
    * Disable the slider
    */
-  disabled: boolean
+  disabled: boolean,
+  sliderColor: string,
+  disabledColor: string,
+  hoverColor: string,
+  circleColor: string,
+  focusColor: string,
+  arcWidth: number,
+  circleWidth: number,
+  handleWidth: number
 }
 
 export interface ICircularSlider extends ICommon {
@@ -60,7 +72,9 @@ export interface ICircularSliderContext extends ICommon {
   /**
    * Id to put svg element on top
    */
-   onTop: string
+   onTop: string,
+   hover: boolean,
+   setHover: Dispatch<SetStateAction<boolean>>
 }
 
 export interface IPosition {

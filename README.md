@@ -41,9 +41,7 @@ const handleChange = (value : [number, number]) => {
 
 render(
   <CircularSlider
-      radius={55}
       value={value}
-      defaultValue={[320, 40]}
       onChange={handleChange}
   />, document.getElementById('root'))
 ```
@@ -52,10 +50,20 @@ render(
 
 Prop name | Type | Default | Description
 ----------|------|---------|-------------
-radius  | number | 52 | Radius of the circular slider
 value | [number, number] | - | The value of the slider
 defaultValue | [number, number] | [320, 40] | The default value of the slider
 onChange | (value) => void | null | Callback function that is fired when the user changes the slider's value
+disabled | boolean | false | If true, the slider will not be interactable
+circleRadius | number | 52 | Radius of the circle
+circleWidth | number | 4 | Stroke width of the circle
+circleColor | string | '#dedede' | Color of the circle
+handleRadius | number | 6 | Radius of the handle
+handleWidth | number | 2 | Stroke width of the handle
+arcWidth | number | 4 | Stroke width of the arc
+sliderColor | string | #91d5ff | Color of the slider when enabled
+disabledColor | string | #b8b8b8 | Color of the slider when disabled
+hoverColor | string | #69c0ff | Color of the slider on hover
+focusColor | string | #69c0ff | Color when the degree input field is in focus
 
 ## License
 

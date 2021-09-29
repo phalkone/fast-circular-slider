@@ -23,9 +23,18 @@ const App = () => {
         }}>Wind direction (°)</label>
     </div>
     <CircularSlider
-      radius={52}
       value={value}
       onChange={handleChange}
+      circleRadius={55}
+      handleRadius={8}
+      sliderColor='#91d5ff'
+      disabledColor='#b8b8b8'
+      hoverColor='#69c0ff'
+      circleColor='#dedede'
+      focusColor='#69c0ff'
+      arcWidth={6}
+      circleWidth={6}
+      handleWidth={4}
     />
   </div>
   )

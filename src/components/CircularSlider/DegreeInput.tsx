@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import type { ChangeEvent } from 'react'
 import type { IDegreeInput } from '../../types/CircularSlider.types'
 import * as styles from '../../themes/CircularSlider.css'
@@ -15,6 +15,9 @@ export const DegreeInput = (props: IDegreeInput) => {
     context.setValue(props.id === 1 ? [context.value[0], degree] : [degree, context.value[1]])
   }
   const selected = (context.selectedHandle === props.id || context.selectedHandle === 2)
+  const [focus, setFocus] = useState<boolean>(false)
+  const onFocus = () => { setFocus(true) }
+  const onBlur = () => { setFocus(false) }
 
   return (
     <div
@@ -28,9 +31,16 @@ export const DegreeInput = (props: IDegreeInput) => {
         <input
           type='number'
           maxLength={3}
-          className={`${styles.input} ${selected ? styles.selectedDegree : ''}`}
+          style={{
+            border: (selected || focus) ? `1px solid ${context.hoverColor}` : `1px solid ${context.circleColor}`,
+            boxShadow: focus ? `0 0 0 2px ${context.hoverColor}33` : 'none'
+          }}
+          className={styles.input}
           value={context.value[props.id].toString().padStart(3, '0')}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={setDegree}
+          disabled={context.disabled}
         />
       </div>
     </div>

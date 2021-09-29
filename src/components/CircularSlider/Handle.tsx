@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import type { IHandle, IPosition, IMousePos } from '../../types/CircularSlider.types'
 import { getAngle } from '../../utils/CircularSlider.utils'
 import { Draggable } from './Draggable'
 import { CircularSliderContext } from '.'
-import * as styles from '../../themes/CircularSlider.css'
 
 /**
  * Handle for the slider
  */
 export const Handle = (props: IHandle) => {
   const context = useContext(CircularSliderContext)
-  const [selected, setSelected] = useState(false)
+  const onMouseEnter = () => context.setHover(true)
+  const onMouseLeave = () => context.setHover(false)
   const onMouseDown = (parent : IMousePos) : IPosition => {
     return {
       x: parent.x + context.center,
@@ -24,29 +24,41 @@ export const Handle = (props: IHandle) => {
   }
 
   const onDrag = (dragging: boolean) : void => {
-    setSelected(dragging)
     context.setSelectedHandle(dragging ? props.id : 3)
   }
 
-  return (
-    <Draggable
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onTop={context.onTop}
-      onDrag={onDrag}>
-      {selected &&
-        <circle
-        cx={context.points[props.id].x}
-        cy={context.points[props.id].y}
-        r={10}
-        className={styles.selected}
-      />}
-      <circle
-        cx={context.points[props.id].x}
-        cy={context.points[props.id].y}
-        r={6}
-        className={styles.handle}
-      />
-    </Draggable>
+  let handle = (
+    <circle
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      cx={context.points[props.id].x}
+      cy={context.points[props.id].y}
+      r={context.handleRadius}
+      fill='white'
+      strokeWidth={context.handleWidth}
+      stroke={context.disabled ? context.disabledColor : (context.hover || context.selectedHandle !== 3) ? context.hoverColor : context.sliderColor}
+    />
   )
+
+  if (!context.disabled) {
+    handle = (
+      <Draggable
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onTop={context.onTop}
+        onDrag={onDrag} >
+        {context.selectedHandle === props.id &&
+          <circle
+            cx={context.points[props.id].x}
+            cy={context.points[props.id].y}
+            r={context.handleRadius + context.handleWidth + 2}
+            fill={`${context.hoverColor}`}
+            opacity={0.2}
+          />}
+          {handle}
+      </Draggable>
+    )
+  }
+
+  return handle
 }
