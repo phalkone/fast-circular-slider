@@ -10,7 +10,7 @@ export const DegreeInput = (props: IDegreeInput) => {
   const setDegree = (e: ChangeEvent<HTMLInputElement>) => {
     let degree = +e.target.value
     if (degree > 360) degree = 360
-    props.setValue(degree)
+    props.setValue(props.id === 1 ? [props.value[0], degree] : [degree, props.value[1]])
   }
   const selected = (props.selectedHandle === props.id || props.selectedHandle === 2)
   const [focus, setFocus] = useState<boolean>(false)
@@ -34,7 +34,7 @@ export const DegreeInput = (props: IDegreeInput) => {
             boxShadow: focus ? `0 0 0 2px ${props.style.hoverColor}33` : 'none'
           }}
           className={styles.input}
-          value={props.value.toString().padStart(3, '0')}
+          value={props.value[props.id].toString().padStart(3, '0')}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={setDegree}

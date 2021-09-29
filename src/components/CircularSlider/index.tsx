@@ -22,12 +22,43 @@ const CircularSlider = (props: ICircularSlider) => {
   const points : [IPosition, IPosition] = [getXY(value[0], props.circleRadius, padding),
     getXY(value[1], props.circleRadius, padding)]
 
-  const setStart = (start: number) : void => { setValue([start, value[1]]) }
-  const setEnd = (end: number) : void => { setValue([value[0], end]) }
-
   useEffect(() => {
     if (props.onChange) props.onChange(value)
   }, value)
+
+  const commonProps = {
+    center: center,
+    selectedHandle: selectedHandle,
+    setSelectedHandle: setSelectedHandle,
+    value: value,
+    setValue: setValue
+  }
+
+  const sliderProps = {
+    points: points,
+    hover: hover,
+    setHover: setHover
+  }
+
+  const degreeProps = {
+    ...commonProps,
+    style: _pick(props, ['circleColor', 'hoverColor', 'disabled'])
+  }
+
+  const handleProps = {
+    ...commonProps,
+    ...sliderProps,
+    onTop: id.current,
+    style: _pick(props, ['disabled', 'hoverColor', 'sliderColor',
+      'handleWidth', 'handleRadius', 'disabledColor'])
+  }
+
+  const arcProps = {
+    ...commonProps,
+    ...sliderProps,
+    style: _pick(props, ['disabled', 'hoverColor', 'sliderColor',
+      'arcWidth', 'circleRadius', 'disabledColor'])
+  }
 
   return (
      <div style={props.style}>
@@ -35,22 +66,12 @@ const CircularSlider = (props: ICircularSlider) => {
         <DegreeInput
           id={0}
           leftOffset={-40}
-          value={value[0]}
-          setValue={setStart}
-          selectedHandle={selectedHandle}
-          setSelectedHandle={setSelectedHandle}
-          center={center}
-          style={_pick(props, ['circleColor', 'hoverColor', 'disabled'])}
+          {...degreeProps}
         />
         <DegreeInput
           id={1}
           leftOffset={3}
-          value={value[1]}
-          setValue={setEnd}
-          selectedHandle={selectedHandle}
-          setSelectedHandle={setSelectedHandle}
-          center={center}
-          style={_pick(props, ['circleColor', 'hoverColor', 'disabled'])}
+          {...degreeProps}
         />
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -67,41 +88,15 @@ const CircularSlider = (props: ICircularSlider) => {
             stroke={props.circleColor}
           />
           <Arc
-            center={center}
-            value={value}
-            points={points}
-            hover={hover}
-            setHover={setHover}
-            setValue={setValue}
-            selectedHandle={selectedHandle}
-            setSelectedHandle={setSelectedHandle}
-            style={_pick(props, ['disabled', 'hoverColor', 'sliderColor', 'arcWidth', 'circleRadius', 'disabledColor'])}
+            {...arcProps}
           />
           <Handle
             id={0}
-            center={center}
-            value={value[0]}
-            setValue={setStart}
-            hover={hover}
-            setHover={setHover}
-            onTop={id.current}
-            point={points[0]}
-            selectedHandle={selectedHandle}
-            setSelectedHandle={setSelectedHandle}
-            style={_pick(props, ['disabled', 'hoverColor', 'sliderColor', 'handleWidth', 'handleRadius', 'disabledColor'])}
+            {...handleProps}
           />
           <Handle
             id={1}
-            center={center}
-            value={value[1]}
-            setValue={setEnd}
-            hover={hover}
-            setHover={setHover}
-            onTop={id.current}
-            point={points[1]}
-            selectedHandle={selectedHandle}
-            setSelectedHandle={setSelectedHandle}
-            style={_pick(props, ['disabled', 'hoverColor', 'sliderColor', 'handleWidth', 'handleRadius', 'disabledColor'])}
+            {...handleProps}
           />
           <use href={`#${id.current}`}/>
         </svg>

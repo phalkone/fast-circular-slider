@@ -81,15 +81,21 @@ export interface IInitialArc extends IPosition {
   arc: number
 }
 
-export interface IArc {
-  center: number,
+interface ICommon {
   value: [number, number],
+  setValue: Dispatch<SetStateAction<[number, number]>>,
+  center: number,
+  selectedHandle: number,
+  setSelectedHandle: Dispatch<SetStateAction<number>>
+}
+
+interface ISlider {
   points: [IPosition, IPosition],
   hover: boolean,
   setHover: Dispatch<SetStateAction<boolean>>,
-  setValue: Dispatch<SetStateAction<[number, number]>>,
-  selectedHandle: number,
-  setSelectedHandle: Dispatch<SetStateAction<number>>,
+}
+
+export interface IArc extends ICommon, ISlider {
   style: {
     disabled: boolean,
     hoverColor: string,
@@ -100,17 +106,9 @@ export interface IArc {
   }
 }
 
-export interface IHandle {
+export interface IHandle extends ICommon, ISlider {
   id: number,
-  center: number,
-  value: number,
-  setValue: (value: number) => void,
-  hover: boolean,
-  setHover: Dispatch<SetStateAction<boolean>>,
-  selectedHandle: number,
-  setSelectedHandle: Dispatch<SetStateAction<number>>,
   onTop: string,
-  point: IPosition,
   style: {
     disabled: boolean,
     hoverColor: string,
@@ -121,14 +119,9 @@ export interface IHandle {
   }
 }
 
-export interface IDegreeInput {
+export interface IDegreeInput extends ICommon {
   id: number,
   leftOffset: number,
-  value: number,
-  setValue: (value: number) => void,
-  center: number,
-  selectedHandle: number,
-  setSelectedHandle: Dispatch<SetStateAction<number>>,
   style: {
     circleColor: string,
     hoverColor: string,

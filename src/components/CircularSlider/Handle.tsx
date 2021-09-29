@@ -18,7 +18,7 @@ export const Handle = (props: IHandle) => {
 
   const onMouseMove = (x: number, y: number, initial: IPosition) : void => {
     const angle : number = getAngle(x, y, initial)
-    props.setValue(angle)
+    props.setValue(props.id === 1 ? [props.value[0], angle] : [angle, props.value[1]])
   }
 
   const onDrag = (dragging: boolean) : void => {
@@ -29,8 +29,8 @@ export const Handle = (props: IHandle) => {
     <circle
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      cx={props.point.x}
-      cy={props.point.y}
+      cx={props.points[props.id].x}
+      cy={props.points[props.id].y}
       r={props.style.handleRadius}
       fill='white'
       strokeWidth={props.style.handleWidth}
@@ -47,8 +47,8 @@ export const Handle = (props: IHandle) => {
         onDrag={onDrag} >
         {props.selectedHandle === props.id &&
           <circle
-            cx={props.point.x}
-            cy={props.point.y}
+            cx={props.points[props.id].x}
+            cy={props.points[props.id].y}
             r={props.style.handleRadius + props.style.handleWidth + 2}
             fill={`${props.style.hoverColor}`}
             opacity={0.2}
