@@ -25,7 +25,7 @@ const App = () => {
     <CircularSlider
       value={value}
       onChange={handleChange}
-      circleRadius={55}
+      circleRadius={68}
       handleRadius={8}
       sliderColor='#91d5ff'
       disabledColor='#b8b8b8'
@@ -35,6 +35,7 @@ const App = () => {
       arcWidth={6}
       circleWidth={6}
       handleWidth={4}
+      ship
     />
   </div>
   )

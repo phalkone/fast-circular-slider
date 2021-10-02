@@ -50,11 +50,10 @@ render(
 
 Prop name | Type | Default | Description
 ----------|------|---------|-------------
-value | [number, number] | - | The value of the slider
-defaultValue | [number, number] | [320, 40] | The default value of the slider
+value | [number, number] | [320, 40] | The value of the slider
 onChange | (value) => void | null | Callback function that is fired when the user changes the slider's value
 disabled | boolean | false | If true, the slider will not be interactable
-circleRadius | number | 52 | Radius of the circle
+circleRadius | number | 67 | Radius of the circle
 circleWidth | number | 4 | Stroke width of the circle
 circleColor | string | '#dedede' | Color of the circle
 handleRadius | number | 6 | Radius of the handle
@@ -64,6 +63,7 @@ sliderColor | string | #91d5ff | Color of the slider when enabled
 disabledColor | string | #b8b8b8 | Color of the slider when disabled
 hoverColor | string | #69c0ff | Color of the slider on hover
 focusColor | string | #69c0ff | Color when the degree input field is in focus
+ship | boolean | false | If true, ship outline will be shown
 
 ## License
 

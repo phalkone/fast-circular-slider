@@ -21,8 +21,8 @@ export const DegreeInput = (props: IDegreeInput) => {
     <div
       className={styles.degreeField}
       style= {{
-        top: `${props.center - 12}px`,
-        left: `${props.center + props.leftOffset}px`
+        top: `${props.center + props.topOffset}px`,
+        left: `${props.center - 25}px`
       }}
     >
       <div className={styles.degree}>

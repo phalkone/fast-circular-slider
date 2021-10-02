@@ -7,13 +7,14 @@ import * as styles from '../../themes/CircularSlider.css'
 import { Handle } from './Handle'
 import { Arc } from './Arc'
 import { DegreeInput } from './DegreeInput'
+import { Ship } from './Ship'
 
 /**
  * Draws a circular slider for provided relative directional data
  * @param {ICircularSlider} props Properties of the CircularSlider as descibed by ICircularSlider.
  */
 const CircularSlider = (props: ICircularSlider) => {
-  const [value, setValue] = useState<[number, number]>(props.value ? props.value : props.defaultValue)
+  const [value, setValue] = useState<[number, number]>(props.value)
   const [selectedHandle, setSelectedHandle] = useState<number>(3)
   const [hover, setHover] = useState<boolean>(false)
   const id = useRef<string>(_uniqueId('active-handle-circular-slider-'))
@@ -65,12 +66,12 @@ const CircularSlider = (props: ICircularSlider) => {
       <div className={styles.container}>
         <DegreeInput
           id={0}
-          leftOffset={-40}
+          topOffset={-36}
           {...degreeProps}
         />
         <DegreeInput
           id={1}
-          leftOffset={3}
+          topOffset={6}
           {...degreeProps}
         />
         <svg
@@ -87,6 +88,17 @@ const CircularSlider = (props: ICircularSlider) => {
             strokeWidth={props.circleWidth}
             stroke={props.circleColor}
           />
+          <path d={`M${center} ${center + 4}` +
+                   `L${center - 6.5} ${center - 4}` +
+                   `L${center} ${center - 1}` +
+                   `L${center + 6.5} ${center - 4}` +
+                   `L${center} ${center + 4}Z`}
+            fill={selectedHandle === 3 ? props.circleColor : props.hoverColor}
+          />
+          {props.ship && <Ship
+            center={center}
+            circleColor={props.circleColor}
+          />}
           <Arc
             {...arcProps}
           />
@@ -106,9 +118,9 @@ const CircularSlider = (props: ICircularSlider) => {
 }
 
 CircularSlider.defaultProps = {
-  circleRadius: 52,
+  circleRadius: 68,
   handleRadius: 6,
-  defaultValue: [320, 40],
+  value: [320, 40],
   disabled: false,
   sliderColor: '#91d5ff',
   disabledColor: '#b8b8b8',

@@ -49,12 +49,7 @@ export interface ICircularSlider {
   /**
    * Value of the slider
    */
-  value?: [number, number]
-  /**
-   * Default value of the slider
-   */
-  defaultValue: [number, number]
-  ,
+  value: [number, number]
   /**
    * Callback function to get set values
    */
@@ -62,7 +57,11 @@ export interface ICircularSlider {
   /**
    * Pass a custom style
    */
-   style?: React.CSSProperties
+   style?: React.CSSProperties,
+  /**
+   * If true, ship outline will be shown
+   */
+  ship?: boolean
 }
 
 export interface IPosition {
@@ -121,7 +120,7 @@ export interface IHandle extends ICommon, ISlider {
 
 export interface IDegreeInput extends ICommon {
   id: number,
-  leftOffset: number,
+  topOffset: number,
   style: {
     circleColor: string,
     hoverColor: string,
@@ -136,4 +135,9 @@ export interface IDraggable {
   onDrag?(dragging: boolean) : void
   children: ReactNode,
   onTop?: string,
+}
+
+export interface IShip {
+  center: number,
+  circleColor: string
 }

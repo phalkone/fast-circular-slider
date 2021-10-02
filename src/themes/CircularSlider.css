@@ -16,20 +16,20 @@
 .degree::after {
   position: absolute;
   top: 2px;
-  right: 1px;
+  right: 5px;
   content: '°';
 }
 
 .input {
-  width: 30px;
-  height: 20px;
-  padding:1px 3px 1px 2px;
+  width: 50px;
+  height: 30px;
+  padding:1px 5px 1px 10px;
   text-align: left;
   text-indent: 1px;
-  background-color: transparent;
+  background-color: rgb(255, 255, 255, 0.7);
   border-radius: 2px;
   font-size:14px;
-  box-sizing: content-box;
+  box-sizing: border-box;
   outline: none;
 }
 
