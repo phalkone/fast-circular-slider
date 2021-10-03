@@ -1,83 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render a circular slider 1`] = `
-<div>
-  <div
-    style={
-      Object {
-        "left": "24px",
-        "top": "52px",
-      }
-    }
-  >
+exports[`Snapshot test of circular slider 1`] = `
+<DocumentFragment>
+  <div>
     <div>
-      <input
-        maxLength={3}
-        onChange={[Function]}
-        type="number"
-        value="320"
-      />
+      <div
+        style="top: 42px; left: 53px;"
+      >
+        <div>
+          <input
+            maxlength="3"
+            style="border: 1px solid #dedede; box-shadow: none;"
+            title="Starting angle"
+            type="number"
+            value="320"
+          />
+        </div>
+      </div>
+      <div
+        style="top: 84px; left: 53px;"
+      >
+        <div>
+          <input
+            maxlength="3"
+            style="border: 1px solid #dedede; box-shadow: none;"
+            title="Ending angle"
+            type="number"
+            value="040"
+          />
+        </div>
+      </div>
+      <svg
+        height="156"
+        width="156"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="78"
+          cy="78"
+          fill="none"
+          r="68"
+          stroke="#dedede"
+          stroke-width="4"
+        />
+        <path
+          d="M78 82L71.5 74L78 77L84.5 74L78 82Z"
+          fill="#dedede"
+        />
+        <g>
+          <path
+            d="M 121.70955745868467 25.908977867909492 A 68 68 0 0 0 34.29044254131531 25.908977867909513"
+            fill="none"
+            stroke="#91d5ff"
+            stroke-width="4"
+          />
+        </g>
+        <g>
+          <circle
+            cx="34.29044254131531"
+            cy="25.908977867909513"
+            data-testid="startHandle"
+            fill="white"
+            r="6"
+            stroke="#91d5ff"
+            stroke-width="2"
+          />
+        </g>
+        <g>
+          <circle
+            cx="121.70955745868467"
+            cy="25.908977867909492"
+            data-testid="endHandle"
+            fill="white"
+            r="6"
+            stroke="#91d5ff"
+            stroke-width="2"
+          />
+        </g>
+      </svg>
     </div>
   </div>
-  <div
-    style={
-      Object {
-        "left": "67px",
-        "top": "52px",
-      }
-    }
-  >
-    <div>
-      <input
-        maxLength={3}
-        onChange={[Function]}
-        type="number"
-        value="040"
-      />
-    </div>
-  </div>
-  <svg
-    height={128}
-    version="1.1"
-    width={128}
-  >
-    <circle
-      cx={64}
-      cy={64}
-      r={52}
-      stroke="#dedede"
-    />
-    <g
-      onMouseDown={[Function]}
-      onTouchStart={[Function]}
-    >
-      <path
-        d="M 97.42495570370005 24.165688957813146 A 52 52 0 0 0 30.575044296299943 24.165688957813153"
-      />
-    </g>
-    <g
-      onMouseDown={[Function]}
-      onTouchStart={[Function]}
-    >
-      <circle
-        cx={30.575044296299943}
-        cy={24.165688957813153}
-        r={6}
-      />
-    </g>
-    <g
-      onMouseDown={[Function]}
-      onTouchStart={[Function]}
-    >
-      <circle
-        cx={97.42495570370005}
-        cy={24.165688957813146}
-        r={6}
-      />
-    </g>
-    <use
-      href="#active"
-    />
-  </svg>
-</div>
+</DocumentFragment>
 `;

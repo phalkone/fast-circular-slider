@@ -33,6 +33,7 @@ export const Handle = (props: IHandle) => {
       cy={props.points[props.id].y}
       r={props.style.handleRadius}
       fill='white'
+      data-testid={props.id === 0 ? 'startHandle' : 'endHandle'}
       strokeWidth={props.style.handleWidth}
       stroke={props.style.disabled ? props.style.disabledColor : (props.hover || props.selectedHandle !== 3) ? props.style.hoverColor : props.style.sliderColor}
     />

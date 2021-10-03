@@ -10,6 +10,7 @@ export const DegreeInput = (props: IDegreeInput) => {
   const setDegree = (e: ChangeEvent<HTMLInputElement>) => {
     let degree = +e.target.value
     if (degree > 360) degree = 360
+    if (degree < 0) degree = 0
     props.setValue(props.id === 1 ? [props.value[0], degree] : [degree, props.value[1]])
   }
   const selected = (props.selectedHandle === props.id || props.selectedHandle === 2)
@@ -39,6 +40,7 @@ export const DegreeInput = (props: IDegreeInput) => {
           onBlur={onBlur}
           onChange={setDegree}
           disabled={props.style.disabled}
+          title={props.id === 0 ? 'Starting angle' : 'Ending angle'}
         />
       </div>
     </div>

@@ -18,7 +18,7 @@ const CircularSlider = (props: ICircularSlider) => {
   const [selectedHandle, setSelectedHandle] = useState<number>(3)
   const [hover, setHover] = useState<boolean>(false)
   const id = useRef<string>(_uniqueId('active-handle-circular-slider-'))
-  const padding = props.handleRadius + props.handleWidth + 4
+  const padding = props.handleRadius + props.handleWidth + 2
   const center = props.circleRadius + padding
   const points : [IPosition, IPosition] = [getXY(value[0], props.circleRadius, padding),
     getXY(value[1], props.circleRadius, padding)]

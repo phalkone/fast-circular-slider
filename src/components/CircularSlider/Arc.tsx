@@ -61,7 +61,8 @@ export const Arc = (props: IArc) => {
       strokeWidth={props.style.arcWidth}
       stroke={stroke}
       onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}/>}
+      onMouseLeave={onMouseLeave}
+      data-testid='fullCircle' />}
     </>
   )
 

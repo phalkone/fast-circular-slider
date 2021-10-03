@@ -15,5 +15,6 @@ module.exports = {
   collectCoverageFrom: ['src/**/*.{mjs,jsx,js,ts,tsx}'],
   testEnvironment: 'jsdom',
   testRegex: 'test/.*(_test|_spec|\\.test|\\.spec)\\.(mjs|jsx|js|ts|tsx)$',
-  verbose: false
+  verbose: false,
+  setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts']
 }
