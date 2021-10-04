@@ -12,7 +12,6 @@ export const Arc = (props: IArc) => {
   const start = props.value[0]
   const end = props.value[1]
   const largeFlag = (end < start ? 360 - start + end : end - start) > 180 ? 1 : 0
-  console.log(largeFlag)
 
   const onMouseDown = (parent : IMousePos) : IInitialArc => {
     const initialCenter = {

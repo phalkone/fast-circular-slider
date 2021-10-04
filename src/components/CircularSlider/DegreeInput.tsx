@@ -22,8 +22,8 @@ export const DegreeInput = (props: IDegreeInput) => {
     <div
       className={styles.degreeField}
       style= {{
-        top: `${props.center + props.topOffset}px`,
-        left: `${props.center - 25}px`
+        top: `${props.center - 14}px`,
+        left: `${props.center + props.leftOffset}px`
       }}
     >
       <div className={styles.degree}>
@@ -31,8 +31,8 @@ export const DegreeInput = (props: IDegreeInput) => {
           type='number'
           maxLength={3}
           style={{
-            border: (selected || focus) ? `1px solid ${props.style.hoverColor}` : `1px solid ${props.style.circleColor}`,
-            boxShadow: focus ? `0 0 0 2px ${props.style.hoverColor}33` : 'none'
+            border: 'none',
+            borderBottom: (selected || focus) ? `1px solid ${props.style.hoverColor}` : `1px solid ${props.style.circleColor}`
           }}
           className={styles.input}
           value={props.value[props.id].toString().padStart(3, '0')}

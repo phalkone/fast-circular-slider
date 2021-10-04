@@ -20,7 +20,7 @@ const App = () => {
           marginBottom: '4px',
           fontWeight: 500,
           fontSize: '14px'
-        }}>Wind direction (°)</label>
+        }}>Rel. wind direction (°)</label>
     </div>
     <CircularSlider
       value={value}

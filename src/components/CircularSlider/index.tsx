@@ -66,12 +66,12 @@ const CircularSlider = (props: ICircularSlider) => {
       <div className={styles.container}>
         <DegreeInput
           id={0}
-          topOffset={-36}
+          leftOffset={props.ship ? -50 : -42}
           {...degreeProps}
         />
         <DegreeInput
           id={1}
-          topOffset={6}
+          leftOffset={props.ship ? 15 : 7}
           {...degreeProps}
         />
         <svg
@@ -88,17 +88,12 @@ const CircularSlider = (props: ICircularSlider) => {
             strokeWidth={props.circleWidth}
             stroke={props.circleColor}
           />
-          <path d={`M${center} ${center + 4}` +
-                   `L${center - 6.5} ${center - 4}` +
-                   `L${center} ${center - 1}` +
-                   `L${center + 6.5} ${center - 4}` +
-                   `L${center} ${center + 4}Z`}
-            fill={selectedHandle === 3 ? props.circleColor : props.hoverColor}
-          />
           {props.ship && <Ship
             center={center}
             circleColor={props.circleColor}
           />}
+          {!props.ship && <rect
+            width={3} height={1} x={center - 1.5} y={center} fill='#000' />}
           <Arc
             {...arcProps}
           />

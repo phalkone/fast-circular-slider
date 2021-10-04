@@ -120,7 +120,7 @@ export interface IHandle extends ICommon, ISlider {
 
 export interface IDegreeInput extends ICommon {
   id: number,
-  topOffset: number,
+  leftOffset: number,
   style: {
     circleColor: string,
     hoverColor: string,
